@@ -15,8 +15,9 @@ android:
 jdk:
   - oraclejdk8
 script:
-  - "echo \"Running unit tests\""
+  - "echo \"Cleaning then runs all tests and generates reports with jacoco\""
   - ./gradlew clean jacocoTestReport
+  - sonar-scanner
 licenses:
     - 'android-sdk-license-.+'
 before_cache:
@@ -40,3 +41,6 @@ cache:
 sudo: required
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+addons:
+  sonarcloud:
+    organization: "thebestpol-github"
