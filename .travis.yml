@@ -1,0 +1,23 @@
+language: android
+android:
+  components:
+    - tools
+    - build-tools-27.0.2
+    - extra-android-support
+    - extra-google-m2repository
+    - extra-android-m2repository
+jdk:
+  - oraclejdk8
+script:
+  - "echo \"Running unit tests\""
+  - ./gradlew test
+licenses:
+    - 'android-sdk-license-.+'
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+    - $HOME/.m2
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+sudo: required
