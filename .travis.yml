@@ -15,8 +15,8 @@ android:
 jdk:
   - oraclejdk8
 script:
-  - "echo \"Cleaning then runs all tests and generates reports with jacoco\""
-  - ./gradlew clean jacocoTestReport
+  - "echo \"Cleaning, do checks and then runs all tests and generates reports with jacoco\""
+  - ./gradlew clean check ktlint jacocoTestReport
   - sonar-scanner
 licenses:
     - 'android-sdk-license-.+'
