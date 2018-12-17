@@ -1,7 +1,4 @@
-# MoviesApp [![Build Status](https://travis-ci.org/thebestpol/MoviesApp.svg?branch=master)](https://travis-ci.org/thebestpol/MoviesApp)
-[![codecov](https://codecov.io/gh/thebestpol/MoviesApp/branch/master/graph/badge.svg)](https://codecov.io/gh/thebestpol/MoviesApp)
-[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=thebestpol_MoviesApp&metric=alert_status)](https://sonarcloud.io/dashboard?id=thebestpol_MoviesApp)
-[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
+# MoviesApp [![Build Status](https://travis-ci.org/thebestpol/MoviesApp.svg?branch=master)](https://travis-ci.org/thebestpol/MoviesApp) [![codecov](https://codecov.io/gh/thebestpol/MoviesApp/branch/master/graph/badge.svg)](https://codecov.io/gh/thebestpol/MoviesApp) [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=thebestpol_MoviesApp&metric=alert_status)](https://sonarcloud.io/dashboard?id=thebestpol_MoviesApp) [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 Simple Android app that displays movies from TMDb.
 
 
