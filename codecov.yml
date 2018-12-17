@@ -1,0 +1,13 @@
+ignore:
+  - '**/*_MembersInjector.class'
+  - '**/Dagger*Component.class'
+  - '**/Dagger*Component$Builder.class'
+  - '**/*Module_*Factory.class'
+  - '**/*Component.class'
+  - '**/*Module.class'
+  - '**/R.class'
+  - '**/R$*.class'
+  - '**/BuildConfig.*'
+  - '**/Manifest*.*'
+  - '**/*Test*.*'
+  - 'android/**/*.*'

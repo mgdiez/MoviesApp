@@ -1,3 +1,6 @@
+env:
+ global:
+   - ADB_INSTALL_TIMEOUT=8 # 8 minutes
 language: android
 android:
   components:
@@ -35,3 +38,5 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 sudo: required
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
