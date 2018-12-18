@@ -62,6 +62,12 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
         with(recyclerView) {
             adapter = moviesAdapter
             layoutManager = moviesLayoutManager
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+                    if (!canScrollVertically(RecyclerView.VERTICAL)) presenter.onBottomReached()
+                }
+            })
+
             setHasFixedSize(true)
         }
         moviesAdapter.setMovieClickListener { movieModel -> presenter.onMovieClicked(movieModel) }
