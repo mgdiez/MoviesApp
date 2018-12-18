@@ -52,11 +52,9 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
     override fun addMovies(movies: List<*>) {
     }
 
-    override fun showLoading() {
-    }
+    override fun showLoading() = progressView.show()
 
-    override fun hideLoading() {
-    }
+    override fun hideLoading() = progressView.hide()
 
     override fun showError() = errorLayout.show()
 
