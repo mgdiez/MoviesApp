@@ -15,4 +15,13 @@ The way of work in this repository is using [GitFlow](https://datasift.github.io
 * Using Jacoco to generate unified test reports and uploading it to [Codecov](https://codecov.io/) to analyze the test coverage of the project.
 * Continuous inspection of the code quality using SonarQube in [SonarCloud](https://sonarcloud.io/) to perform automatic reviews static analysis of code to detect bugs, code smells, and security vulnerabilities.
 * Checks with a Kotlin linter with built-in formatter [Ktlint](https://ktlint.github.io/).
-
+#### Second one: The project foundation
+* Designed an ***User Story***, created to move Activity responsibilities as state changes, communication between fragment and the navigation. The main reason of this is to allow unit testing 
+isolated from the Android Framework and improve the sociable unit tests. This design consist in a set of entities as:
+    * ***StoryScreen***: Entity that defines the screen view and where will be placed.
+    * ***StoryScreenContainer***: Entity that handles the screens.
+    * ***UserStory*** handles the state and their child will define the navigation for each User Story.
+    * ***StoryState*** the Story state.
+* Added ***Dagger 2*** dependency to the project and created the basic configuration, defined custom scopes.
+* Added ***RxJava 2*** and ***RxKotlin*** dependencies to the project, the architecture will be based on Reactive-Streams.
+* Created an base User Story Activity and Application.
