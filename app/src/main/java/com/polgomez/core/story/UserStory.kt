@@ -2,7 +2,7 @@ package com.polgomez.core.story
 
 import android.os.Bundle
 
-abstract class UserStory<S : StoryState>(private val storyScreenContainer: StoryScreenContainer, var state: S) {
+abstract class UserStory<S : StoryState>(val storyScreenContainer: StoryScreenContainer, var state: S) {
 
     abstract fun start()
 
