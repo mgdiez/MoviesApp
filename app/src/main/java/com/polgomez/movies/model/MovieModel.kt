@@ -1,3 +1,7 @@
 package com.polgomez.movies.model
 
-data class MovieModel(val title: String, val imageUrl: String)
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class MovieModel(val title: String, val imageUrl: String) : Parcelable

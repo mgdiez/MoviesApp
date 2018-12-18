@@ -19,30 +19,23 @@ class MoviesListModule() {
 
     @Provides
     @PerFragment
-    fun provideState(moviesState: MoviesState): MoviesListContract.State {
-        return moviesState
-    }
+    fun provideState(moviesState: MoviesState): MoviesListContract.State = moviesState
 
     @Provides
     @PerFragment
-    fun provideNavigation(userStory: UserStory<*>): MoviesListContract.Navigation {
-        return userStory as MoviesListContract.Navigation
-    }
+    fun provideNavigation(userStory: UserStory<*>): MoviesListContract.Navigation =
+        userStory as MoviesListContract.Navigation
 
     @Provides
     @PerFragment
-    fun provideAdapter(imageLoader: ImageLoader): RecyclerView.Adapter<RecyclerView.ViewHolder> {
-        return MoviesListAdapter(imageLoader)
-    }
+    fun provideAdapter(imageLoader: ImageLoader): MoviesListAdapter = MoviesListAdapter(imageLoader)
 
     @Provides
     @PerFragment
     fun providePresenter(
         state: MoviesListContract.State,
         navigation: MoviesListContract.Navigation
-    ): MoviesListContract.Presenter {
-        return MovieListPresenter(state, navigation)
-    }
+    ): MoviesListContract.Presenter = MovieListPresenter(state, navigation)
 
     @Provides
     @PerFragment

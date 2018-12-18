@@ -2,23 +2,22 @@ package com.polgomez.movies.story
 
 import com.polgomez.core.story.StoryState
 import com.polgomez.movies.list.MoviesListContract
+import com.polgomez.movies.model.MovieModel
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class MoviesState : StoryState, MoviesListContract.State {
-    override fun getMovies(): List<*> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+class MoviesState(private var stateMovies: List<MovieModel>? = null, private var statePage: Int = 0) : StoryState,
+    MoviesListContract.State {
 
-    override fun setMovies(movies: List<*>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getMovies(): List<MovieModel>? = stateMovies
+
+    override fun setMovies(movies: List<MovieModel>) {
+        stateMovies = movies
     }
 
     override fun setPage(page: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        statePage = page
     }
 
-    override fun getPage(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getPage(): Int = statePage
 }

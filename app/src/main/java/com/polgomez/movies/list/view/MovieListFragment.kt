@@ -12,6 +12,8 @@ import com.polgomez.movies.MoviesActivity
 import com.polgomez.movies.R
 import com.polgomez.movies.list.MoviesListContract
 import com.polgomez.movies.list.di.MoviesListModule
+import com.polgomez.movies.list.view.adapter.MoviesListAdapter
+import com.polgomez.movies.model.MovieModel
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 import javax.inject.Inject
 
@@ -21,7 +23,7 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
     lateinit var presenter: MoviesListContract.Presenter
 
     @Inject
-    lateinit var moviesAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
+    lateinit var moviesAdapter: MoviesListAdapter
 
     @Inject
     lateinit var moviesLayoutManager: RecyclerView.LayoutManager
@@ -45,6 +47,12 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
         super.onViewCreated(view, savedInstanceState)
 
         initializeViews()
+        initializePresenter()
+    }
+
+    private fun initializePresenter() {
+        presenter.attachView(this)
+        presenter.start()
     }
 
     private fun initializeViews() {
@@ -56,13 +64,17 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
             layoutManager = moviesLayoutManager
             setHasFixedSize(true)
         }
+        moviesAdapter.setMovieClickListener { movieModel -> presenter.onMovieClicked(movieModel) }
     }
 
-    override fun showMovies(movies: List<*>) {
+    override fun onStop() {
+        super.onStop()
+        presenter.stop()
     }
 
-    override fun addMovies(movies: List<*>) {
-    }
+    override fun showMovies(movies: List<MovieModel>) = moviesAdapter.setMovies(movies)
+
+    override fun addMovies(movies: List<MovieModel>) = moviesAdapter.addMovies(movies)
 
     override fun showLoading() = progressView.show()
 

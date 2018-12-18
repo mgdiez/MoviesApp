@@ -1,6 +1,7 @@
 package com.polgomez.movies.list.presenter
 
 import com.polgomez.movies.list.MoviesListContract
+import com.polgomez.movies.model.MovieModel
 
 class MovieListPresenter(
     private val state: MoviesListContract.State,
@@ -21,7 +22,7 @@ class MovieListPresenter(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onMovieClicked() {
+    override fun onMovieClicked(movieModel: MovieModel) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
