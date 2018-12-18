@@ -6,6 +6,8 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
+apply plugin: 'kotlin-kapt'
+
 apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'jacoco'
@@ -91,9 +93,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
     implementation "com.google.dagger:dagger:2.17"
-    implementation "com.google.dagger:dagger-android-support:2.15"
     kapt "com.google.dagger:dagger-compiler:2.17"
-    kapt "com.google.dagger:dagger-android-processor:2.16"
     testAnnotationProcessor "com.google.dagger:dagger-compiler:2.17"
 
     implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
