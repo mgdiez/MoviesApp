@@ -22,7 +22,7 @@ class MoviesStoryTest {
     @Test
     fun `should add any screen to the container on start `() {
         moviesStory.start()
-        
+
         verify(storyScreenContainer).addStoryScreen(any())
     }
 }

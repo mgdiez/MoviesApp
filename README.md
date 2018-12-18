@@ -25,3 +25,6 @@ isolated from the Android Framework and improve the sociable unit tests. This de
 * Added ***Dagger 2*** dependency to the project and created the basic configuration, defined custom scopes.
 * Added ***RxJava 2*** and ***RxKotlin*** dependencies to the project, the architecture will be based on Reactive-Streams.
 * Created an base User Story Activity and Application.
+#### Third one: Movies User Story
+* Implemented all related entities to create the MoviesStory. Created a MoviesActivity that will contain the fragments. The activities will be only as a Fragment containers, created layout for movies activity as a container with a CoordinatorLayout.
+* Added Mockito and Mockito Kotlin dependencies to the project and some unit testing for the movies story.
