@@ -2,11 +2,11 @@ package com.polgomez.movies.list
 
 interface MoviesListContract {
     interface View {
-        fun showError()
         fun showMovies(movies: List<*>)
         fun addMovies(movies: List<*>)
         fun showLoading()
         fun hideLoading()
+        fun showError()
         fun hideError()
     }
 
