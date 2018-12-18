@@ -17,7 +17,7 @@ import javax.inject.Inject
 class MovieListFragment : Fragment(), MoviesListContract.View {
 
     @Inject
-    private lateinit var presenter: MoviesListContract.Presenter
+    lateinit var presenter: MoviesListContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -11,6 +11,7 @@ interface MoviesListContract {
     }
 
     interface Presenter {
+        fun attachView(view: MoviesListContract.View)
         fun start()
         fun stop()
         fun onMovieClicked()
@@ -26,6 +27,7 @@ interface MoviesListContract {
     }
 
     interface Navigation {
-        fun onMovieSelected()
+        fun navigateToMovieDetail()
+        fun navigateToFilters()
     }
 }

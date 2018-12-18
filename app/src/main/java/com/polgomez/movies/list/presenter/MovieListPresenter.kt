@@ -2,7 +2,17 @@ package com.polgomez.movies.list.presenter
 
 import com.polgomez.movies.list.MoviesListContract
 
-class MovieListPresenter : MoviesListContract.Presenter {
+class MovieListPresenter(
+    private val state: MoviesListContract.State,
+    private val navigation: MoviesListContract.Navigation
+) : MoviesListContract.Presenter {
+
+    lateinit var view: MoviesListContract.View
+
+    override fun attachView(view: MoviesListContract.View) {
+        this.view = view
+    }
+
     override fun start() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
