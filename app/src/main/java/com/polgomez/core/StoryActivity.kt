@@ -1,14 +1,13 @@
 package com.polgomez.core
 
 import android.os.Bundle
-import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
-import com.polgomez.core.story.StoryContainer
+import com.polgomez.core.story.StoryScreenContainer
 import com.polgomez.core.story.StoryState
 import com.polgomez.core.story.UserStory
 import com.polgomez.movies.R
 
-abstract class StoryActivity : AppCompatActivity(), StoryContainer {
+abstract class StoryActivity : AppCompatActivity(), StoryScreenContainer {
 
     lateinit var userStory: UserStory<StoryState>
 
@@ -25,8 +24,4 @@ abstract class StoryActivity : AppCompatActivity(), StoryContainer {
         userStory.storeState(outState)
         super.onSaveInstanceState(outState)
     }
-
-    override fun getContainerId(): Int = R.id.container
-
-    override fun getStoryFragmentManager(): FragmentManager = supportFragmentManager
 }
