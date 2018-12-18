@@ -5,6 +5,4 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [MoviesAppModule::class])
-interface MoviesAppComponent {
-
-}
+interface MoviesAppComponent
