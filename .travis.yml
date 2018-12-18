@@ -1,0 +1,46 @@
+env:
+ global:
+   - ADB_INSTALL_TIMEOUT=8 # 8 minutes
+language: android
+android:
+  components:
+    - tools
+    - build-tools-27.0.2
+    - extra-android-support
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - android-22
+    - android-26
+    - sys-img-armeabi-v7a-android-22
+jdk:
+  - oraclejdk8
+script:
+  - "echo \"Cleaning, do checks and then runs all tests and generates reports with jacoco\""
+  - ./gradlew clean check ktlint jacocoTestReport
+  - sonar-scanner
+licenses:
+    - 'android-sdk-license-.+'
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+before_install:
+ - yes | sdkmanager "platforms;android-27" "build-tools;27.0.2"
+ - chmod +x gradlew
+before_script:
+ - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+ - emulator -avd test -no-audio -no-window &
+ - android-wait-for-emulator
+ - adb shell settings put global window_animation_scale 0 &
+ - adb shell settings put global transition_animation_scale 0 &
+ - adb shell settings put global animator_duration_scale 0 &
+ - adb shell input keyevent 82 &
+cache:
+  directories:
+    - $HOME/.m2
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+sudo: required
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+addons:
+  sonarcloud:
+    organization: "thebestpol-github"
