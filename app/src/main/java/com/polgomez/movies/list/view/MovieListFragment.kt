@@ -21,7 +21,10 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
     lateinit var presenter: MoviesListContract.Presenter
 
     @Inject
-    lateinit var movieAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
+    lateinit var moviesAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
+
+    @Inject
+    lateinit var moviesLayoutManager: RecyclerView.LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +52,8 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
             presenter.onRetryClicked()
         }
         with(recyclerView) {
-            adapter = movieAdapter
+            adapter = moviesAdapter
+            layoutManager = moviesLayoutManager
             setHasFixedSize(true)
         }
     }

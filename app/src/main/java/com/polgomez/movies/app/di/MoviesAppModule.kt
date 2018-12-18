@@ -8,9 +8,9 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class MoviesAppModule(private val moviesApp: MoviesApp){
+class MoviesAppModule(private val moviesApp: MoviesApp) {
 
     @Provides
     @Singleton
-    fun provideImageLoader() : ImageLoader = PicassoImageLoader()
+    fun provideImageLoader(): ImageLoader = PicassoImageLoader()
 }
