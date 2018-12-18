@@ -1,5 +1,6 @@
 package com.polgomez.movies.di
 
+import android.support.v4.app.FragmentManager
 import com.polgomez.core.di.scope.PerActivity
 import com.polgomez.core.story.StoryScreenContainer
 import com.polgomez.core.story.UserStory
@@ -15,7 +16,12 @@ class MoviesActivityModule(private val moviesActivity: MoviesActivity) {
 
     @Provides
     @PerActivity
-    fun provideStoryContainer(): StoryScreenContainer = MoviesScreenContainer(moviesActivity.supportFragmentManager)
+    fun provideFragmentManager() = moviesActivity.supportFragmentManager
+
+    @Provides
+    @PerActivity
+    fun provideStoryContainer(fragmentManager: FragmentManager): StoryScreenContainer =
+        MoviesScreenContainer(fragmentManager)
 
     @Provides
     @PerActivity
