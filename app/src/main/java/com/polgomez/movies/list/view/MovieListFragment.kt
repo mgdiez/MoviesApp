@@ -50,9 +50,9 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
         initializePresenter()
     }
 
-    private fun initializePresenter() {
-        presenter.attachView(this)
-        presenter.start()
+    private fun initializePresenter() = presenter.apply {
+        attachView(this@MovieListFragment)
+        start()
     }
 
     private fun initializeViews() {

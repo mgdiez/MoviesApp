@@ -19,7 +19,7 @@ class MovieDetailFragment : Fragment(), MovieDetailContract.View {
 
     @Inject
     lateinit var imageLoader: ImageLoader
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,8 +44,11 @@ class MovieDetailFragment : Fragment(), MovieDetailContract.View {
         initializePresenter()
     }
 
-    private fun initializePresenter() {
+    private fun initializePresenter() = presenter.apply {
+        attachView(this@MovieDetailFragment)
+        start()
     }
+
 
     private fun initializeViews() {
     }
