@@ -59,6 +59,7 @@ class MovieListPresenter(
         if (currentPage <= totalPages) {
             state.setPage(currentPage + 1)
         }
+        state.setTotalPages(totalPages)
     }
 
     override fun stop() {

@@ -39,6 +39,9 @@ isolated from the Android Framework and improve the sociable unit tests. This de
 * Created custom test rules to allow mock in the injected dependencies for Robolectric and JUnit.
 * Handling screen orientation, storing and restoring the state without data loss. Also the screen is rendering in different ways for landscape or portrait.
 * Strong and advanced use of Dagger to inject dependencies everywhere.
-* Refactorized first iteration of user story
+* Refactorized first iteration of user story.
 * Added Lottie dependency to show custom animation for the error and the loading views.
-    
+### Fifth: Data layer, Movies Api
+* Added Retrofit dependency to this project, implemented Retrofit boilerplate.
+* Created a MoviesApi, data transfer objects as data classes for the responses and the mappers to map to business object then implemented a MoviesRepository.
+* Created a NetworkModule to expose all the data dependencies. Updated subcomponents and their modules.

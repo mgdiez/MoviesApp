@@ -13,9 +13,9 @@ import com.polgomez.core.story.UserStory
 import com.polgomez.movies.BuildConfig
 import com.polgomez.movies.MoviesActivity
 import com.polgomez.movies.R
+import com.polgomez.movies.domain.bo.Movie
 import com.polgomez.movies.list.MoviesListContract
 import com.polgomez.movies.list.view.adapter.MoviesListAdapter
-import com.polgomez.movies.domain.bo.Movie
 import com.polgomez.movies.story.MoviesStory
 import com.polgomez.robolectricDaggerMockRule
 import org.junit.Before
@@ -126,8 +126,8 @@ class MovieListFragmentTest {
     fun `should render movie models`() {
         fragment.showMovies(
             listOf(
-                Movie("firstMovieTitle", "fakeUrl"),
-                Movie("secondMovieTitle", "fakeUrl")
+                Movie("firstMovieTitle", "fakeDescription", "fakeUrl", "fakeUrl"),
+                Movie("secondMovieTitle", "fakeDescription", "fakeUrl", "fakeUrl")
             )
         )
 
@@ -140,14 +140,14 @@ class MovieListFragmentTest {
     fun `should render paginated movie models`() {
         fragment.showMovies(
             listOf(
-                Movie("firstMovieTitle", "fakeUrl"),
-                Movie("secondMovieTitle", "fakeUrl")
+                Movie("firstMovieTitle", "fakeDescription", "fakeUrl", "fakeUrl"),
+                Movie("secondMovieTitle", "fakeDescription", "fakeUrl", "fakeUrl")
             )
         )
         fragment.showMoreMovies(
             listOf(
-                Movie("thirdMovieTitle", "fakeUrl"),
-                Movie("fourthMovieTitle", "fakeUrl")
+                Movie("thirdMovieTitle", "fakeDescription", "fakeUrl", "fakeUrl"),
+                Movie("fourthMovieTitle", "fakeDescription", "fakeUrl", "fakeUrl")
             )
         )
 
