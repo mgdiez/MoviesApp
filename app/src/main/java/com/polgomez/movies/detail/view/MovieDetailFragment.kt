@@ -10,6 +10,7 @@ import com.polgomez.movies.MoviesActivity
 import com.polgomez.movies.R
 import com.polgomez.movies.detail.MovieDetailContract
 import com.polgomez.movies.detail.di.MovieDetailModule
+import kotlinx.android.synthetic.main.fragment_movie_detail.*
 import javax.inject.Inject
 
 class MovieDetailFragment : Fragment(), MovieDetailContract.View {
@@ -40,7 +41,6 @@ class MovieDetailFragment : Fragment(), MovieDetailContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initializeViews()
         initializePresenter()
     }
 
@@ -49,19 +49,20 @@ class MovieDetailFragment : Fragment(), MovieDetailContract.View {
         start()
     }
 
-    private fun initializeViews() {
-    }
-
     override fun showMovieBigImage(imageUrl: String) {
+        imageLoader.loadImage(collapsingImageView, imageUrl)
     }
 
     override fun showMovieDescription(description: String) {
+        descriptionText.text = description
     }
 
     override fun showMovieYear(movieYear: String) {
+        yearText.text = movieYear
     }
 
     override fun showMovieTitle(title: String) {
+        titleText.text = title
     }
 
     companion object {

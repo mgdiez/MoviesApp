@@ -15,7 +15,7 @@ class MovieDetailPresenter(private val state: MovieDetailContract.State) : Movie
             with(view) {
                 showMovieDescription(description)
                 showMovieYear(year)
-                showMovieBigImage(imageUrl)
+                showMovieBigImage(bigImageUrl)
                 showMovieTitle(title)
             }
         }
