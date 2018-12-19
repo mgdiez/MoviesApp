@@ -5,7 +5,7 @@ import com.polgomez.movies.model.MovieModel
 interface MoviesListContract {
     interface View {
         fun showMovies(movies: List<MovieModel>)
-        fun addMovies(movies: List<MovieModel>)
+        fun showMoreMovies(movies: List<MovieModel>)
         fun showLoading()
         fun hideLoading()
         fun showError()

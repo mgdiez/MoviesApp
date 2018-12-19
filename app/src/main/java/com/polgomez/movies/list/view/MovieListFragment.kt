@@ -80,7 +80,7 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
 
     override fun showMovies(movies: List<MovieModel>) = moviesAdapter.setMovies(movies)
 
-    override fun addMovies(movies: List<MovieModel>) = moviesAdapter.addMovies(movies)
+    override fun showMoreMovies(movies: List<MovieModel>) = moviesAdapter.addMovies(movies)
 
     override fun showLoading() = progressView.show()
 
