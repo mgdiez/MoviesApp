@@ -14,4 +14,8 @@ interface MovieDetailContract {
 
         fun start()
     }
+
+    interface State {
+        fun getCurrentMovie(): Movie
+    }
 }

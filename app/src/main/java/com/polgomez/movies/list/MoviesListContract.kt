@@ -28,6 +28,7 @@ interface MoviesListContract {
         fun getPage(): Int
         fun setTotalPages(page: Int)
         fun getTotalPages(): Int
+        fun setSelectedMovie(movie: Movie)
     }
 
     interface Navigation {
