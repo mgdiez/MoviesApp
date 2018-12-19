@@ -23,6 +23,8 @@ class MoviesListAdapter(private val imageLoader: ImageLoader) : RecyclerView.Ada
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
         MovieViewHolder(parent.inflate(viewType))
 
+    override fun getItemId(position: Int): Long = position.toLong()
+
     override fun getItemCount(): Int = movies.size
 
     override fun getItemViewType(position: Int): Int = R.layout.item_movie
