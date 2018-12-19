@@ -4,7 +4,11 @@ import com.polgomez.movies.domain.bo.Movie
 
 interface MovieDetailContract {
     interface View {
-        fun showMovieDetails(movie: Movie)
+        fun showMovieBigImage(imageUrl: String)
+
+        fun showMovieDescription(description: String)
+
+        fun showMovieYear(movieYear: String)
 
         fun showTitleShow(title: String)
     }

@@ -5,14 +5,14 @@ import com.polgomez.movies.detail.view.MovieDetailFragment
 import dagger.Subcomponent
 
 @PerFragment
-@Subcomponent(modules = [MoviesDetailModule::class])
+@Subcomponent(modules = [MovieDetailModule::class])
 interface MovieDetailComponent {
 
     fun inject(fragment: MovieDetailFragment)
 
     @Subcomponent.Builder
     interface Builder {
-        fun moviesDetailModule(module: MoviesDetailModule): Builder
+        fun moviesDetailModule(module: MovieDetailModule): Builder
 
         fun build(): MovieDetailComponent
     }
