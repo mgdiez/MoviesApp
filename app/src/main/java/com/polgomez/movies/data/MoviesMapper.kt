@@ -19,7 +19,7 @@ class MoviesMapper {
                 it.overview ?: "",
                 generateImageUrl(it.poster_path),
                 generateBigImageUrl(it.poster_path),
-                it.first_air_date.substring(IntRange(0, 3))
+                it.first_air_date
             )
         }
 

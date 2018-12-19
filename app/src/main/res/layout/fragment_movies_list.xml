@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/retry"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="@dimen/error_bottom_marign"
+                    android:layout_marginBottom="@dimen/error_bottom_margin"
                     android:layout_centerHorizontal="true"
                     tools:ignore="ContentDescription"/>
 
