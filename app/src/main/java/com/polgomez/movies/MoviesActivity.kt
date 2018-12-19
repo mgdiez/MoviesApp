@@ -11,7 +11,7 @@ class MoviesActivity : StoryActivity() {
 
     lateinit var moviesActivityComponent: MoviesActivityComponent
 
-    override fun getLayoutResource(): Int = R.layout.activity_main
+    override fun getLayoutResource(): Int = R.layout.activity_container
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
