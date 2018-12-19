@@ -49,7 +49,6 @@ class MovieDetailFragment : Fragment(), MovieDetailContract.View {
         start()
     }
 
-
     private fun initializeViews() {
     }
 
@@ -62,7 +61,7 @@ class MovieDetailFragment : Fragment(), MovieDetailContract.View {
     override fun showMovieYear(movieYear: String) {
     }
 
-    override fun showTitleShow(title: String) {
+    override fun showMovieTitle(title: String) {
     }
 
     companion object {

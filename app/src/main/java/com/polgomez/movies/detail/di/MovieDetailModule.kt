@@ -20,4 +20,3 @@ class MovieDetailModule {
     @PerFragment
     fun provideState(moviesState: MoviesState): MovieDetailContract.State = moviesState
 }
-

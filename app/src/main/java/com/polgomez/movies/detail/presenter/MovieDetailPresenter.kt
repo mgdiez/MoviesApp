@@ -11,8 +11,13 @@ class MovieDetailPresenter(private val state: MovieDetailContract.State) : Movie
     }
 
     override fun start() {
-        with(view) {
-            TODO()
+        with(state.getCurrentMovie()) {
+            with(view) {
+                showMovieDescription(description)
+                showMovieYear(year)
+                showMovieBigImage(imageUrl)
+                showMovieTitle(title)
+            }
         }
     }
 }

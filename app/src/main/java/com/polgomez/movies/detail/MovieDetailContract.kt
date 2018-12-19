@@ -10,7 +10,7 @@ interface MovieDetailContract {
 
         fun showMovieYear(movieYear: String)
 
-        fun showTitleShow(title: String)
+        fun showMovieTitle(title: String)
     }
 
     interface Presenter {

@@ -126,8 +126,8 @@ class MovieListFragmentTest {
     fun `should render movie models`() {
         fragment.showMovies(
             listOf(
-                Movie("firstMovieTitle", "fakeDescription", "fakeUrl", "fakeUrl"),
-                Movie("secondMovieTitle", "fakeDescription", "fakeUrl", "fakeUrl")
+                createFakeMovie(),
+                createFakeMovie("second")
             )
         )
 
@@ -140,14 +140,14 @@ class MovieListFragmentTest {
     fun `should render paginated movie models`() {
         fragment.showMovies(
             listOf(
-                Movie("firstMovieTitle", "fakeDescription", "fakeUrl", "fakeUrl"),
-                Movie("secondMovieTitle", "fakeDescription", "fakeUrl", "fakeUrl")
+                createFakeMovie(),
+                createFakeMovie("second")
             )
         )
         fragment.showMoreMovies(
             listOf(
-                Movie("thirdMovieTitle", "fakeDescription", "fakeUrl", "fakeUrl"),
-                Movie("fourthMovieTitle", "fakeDescription", "fakeUrl", "fakeUrl")
+                createFakeMovie("third"),
+                createFakeMovie("fourth")
             )
         )
 
@@ -155,4 +155,12 @@ class MovieListFragmentTest {
         val itemCount = recyclerView?.adapter!!.itemCount
         assert(itemCount == 4)
     }
+
+    private fun createFakeMovie(position: String = "first") = Movie(
+        "$position MovieTitle",
+        "$position fakeDescription",
+        "$position fakeUrl",
+        "$position fakeUrl",
+        "$position fakeYear"
+    )
 }
