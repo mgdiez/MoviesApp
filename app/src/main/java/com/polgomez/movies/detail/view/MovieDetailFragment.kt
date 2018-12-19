@@ -21,12 +21,6 @@ class MovieDetailFragment : Fragment(), MovieDetailContract.View {
     @Inject
     lateinit var imageLoader: ImageLoader
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        initializeInjections()
-    }
-
     private fun initializeInjections() {
         val moviesActivity = activity as MoviesActivity
         moviesActivity.moviesActivityComponent.movieDetailComponentBuilder()
@@ -40,7 +34,7 @@ class MovieDetailFragment : Fragment(), MovieDetailContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initializeInjections()
         initializePresenter()
     }
 

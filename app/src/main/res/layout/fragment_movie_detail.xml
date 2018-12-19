@@ -28,7 +28,7 @@
             <ImageView
                     android:id="@+id/collapsingImageView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="480dp"
                     android:scaleType="centerCrop"
                     app:layout_collapseMode="parallax"
                     android:contentDescription="@string/content_description"/>

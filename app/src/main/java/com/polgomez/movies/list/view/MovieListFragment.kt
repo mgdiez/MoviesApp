@@ -28,12 +28,6 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
     @Inject
     lateinit var moviesLayoutManager: RecyclerView.LayoutManager
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        initializeInjections()
-    }
-
     private fun initializeInjections() {
         val moviesActivity = activity as MoviesActivity
         moviesActivity.moviesActivityComponent.moviesListComponentBuilder().moviesListModule(MoviesListModule()).build()
@@ -45,7 +39,7 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initializeInjections()
         initializeViews()
         initializePresenter()
     }
