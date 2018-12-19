@@ -8,13 +8,13 @@ import android.widget.TextView
 import com.polgomez.core.extensions.inflate
 import com.polgomez.core.view.ImageLoader
 import com.polgomez.movies.R
-import com.polgomez.movies.model.MovieModel
+import com.polgomez.movies.domain.bo.Movie
 
 class MoviesListAdapter(private val imageLoader: ImageLoader) : RecyclerView.Adapter<MovieViewHolder>() {
 
-    private var movies: MutableList<MovieModel> = ArrayList()
+    private var movies: MutableList<Movie> = ArrayList()
 
-    private lateinit var movieListener: (MovieModel) -> Unit
+    private lateinit var movieListener: (Movie) -> Unit
 
     init {
         setHasStableIds(true)
@@ -36,16 +36,16 @@ class MoviesListAdapter(private val imageLoader: ImageLoader) : RecyclerView.Ada
         }
     }
 
-    fun setMovieClickListener(listener: (MovieModel) -> Unit) {
+    fun setMovieClickListener(listener: (Movie) -> Unit) {
         movieListener = listener
     }
 
-    fun setMovies(movies: List<MovieModel>) {
+    fun setMovies(movies: List<Movie>) {
         this.movies = movies.toMutableList()
         notifyDataSetChanged()
     }
 
-    fun addMovies(movies: List<MovieModel>) {
+    fun addMovies(movies: List<Movie>) {
         val previousSize = this.movies.size
         this.movies.addAll(movies)
         notifyItemRangeInserted(previousSize, this.movies.size)

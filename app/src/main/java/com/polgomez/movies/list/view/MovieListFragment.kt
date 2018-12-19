@@ -10,10 +10,10 @@ import com.polgomez.core.extensions.hide
 import com.polgomez.core.extensions.show
 import com.polgomez.movies.MoviesActivity
 import com.polgomez.movies.R
+import com.polgomez.movies.domain.bo.Movie
 import com.polgomez.movies.list.MoviesListContract
 import com.polgomez.movies.list.di.MoviesListModule
 import com.polgomez.movies.list.view.adapter.MoviesListAdapter
-import com.polgomez.movies.model.MovieModel
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 import javax.inject.Inject
 
@@ -78,9 +78,9 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
         presenter.stop()
     }
 
-    override fun showMovies(movies: List<MovieModel>) = moviesAdapter.setMovies(movies)
+    override fun showMovies(movies: List<Movie>) = moviesAdapter.setMovies(movies)
 
-    override fun showMoreMovies(movies: List<MovieModel>) = moviesAdapter.addMovies(movies)
+    override fun showMoreMovies(movies: List<Movie>) = moviesAdapter.addMovies(movies)
 
     override fun showLoading() = progressView.show()
 

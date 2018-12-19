@@ -1,11 +1,11 @@
 package com.polgomez.movies.list
 
-import com.polgomez.movies.model.MovieModel
+import com.polgomez.movies.domain.bo.Movie
 
 interface MoviesListContract {
     interface View {
-        fun showMovies(movies: List<MovieModel>)
-        fun showMoreMovies(movies: List<MovieModel>)
+        fun showMovies(movies: List<Movie>)
+        fun showMoreMovies(movies: List<Movie>)
         fun showLoading()
         fun hideLoading()
         fun showError()
@@ -16,14 +16,14 @@ interface MoviesListContract {
         fun attachView(view: MoviesListContract.View)
         fun start()
         fun stop()
-        fun onMovieClicked(movieModel: MovieModel)
+        fun onMovieClicked(movie: Movie)
         fun onBottomReached()
         fun onRetryClicked()
     }
 
     interface State {
-        fun getMovies(): List<MovieModel>?
-        fun setMovies(movies: List<MovieModel>)
+        fun getMovies(): List<Movie>?
+        fun setMovies(movies: List<Movie>)
         fun setPage(page: Int)
         fun getPage(): Int
     }

@@ -15,7 +15,7 @@ import com.polgomez.movies.MoviesActivity
 import com.polgomez.movies.R
 import com.polgomez.movies.list.MoviesListContract
 import com.polgomez.movies.list.view.adapter.MoviesListAdapter
-import com.polgomez.movies.model.MovieModel
+import com.polgomez.movies.domain.bo.Movie
 import com.polgomez.movies.story.MoviesStory
 import com.polgomez.robolectricDaggerMockRule
 import org.junit.Before
@@ -125,7 +125,10 @@ class MovieListFragmentTest {
     @Test
     fun `should render movie models`() {
         fragment.showMovies(
-            listOf(MovieModel("firstMovieTitle", "fakeUrl"), MovieModel("secondMovieTitle", "fakeUrl"))
+            listOf(
+                Movie("firstMovieTitle", "fakeUrl"),
+                Movie("secondMovieTitle", "fakeUrl")
+            )
         )
 
         val recyclerView = fragment.view?.findViewById<RecyclerView>(R.id.recyclerView)
@@ -137,14 +140,14 @@ class MovieListFragmentTest {
     fun `should render paginated movie models`() {
         fragment.showMovies(
             listOf(
-                MovieModel("firstMovieTitle", "fakeUrl"),
-                MovieModel("secondMovieTitle", "fakeUrl")
+                Movie("firstMovieTitle", "fakeUrl"),
+                Movie("secondMovieTitle", "fakeUrl")
             )
         )
         fragment.showMoreMovies(
             listOf(
-                MovieModel("thirdMovieTitle", "fakeUrl"),
-                MovieModel("fourthMovieTitle", "fakeUrl")
+                Movie("thirdMovieTitle", "fakeUrl"),
+                Movie("fourthMovieTitle", "fakeUrl")
             )
         )
 

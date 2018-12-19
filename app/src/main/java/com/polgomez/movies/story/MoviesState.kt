@@ -1,17 +1,17 @@
 package com.polgomez.movies.story
 
 import com.polgomez.core.story.StoryState
+import com.polgomez.movies.domain.bo.Movie
 import com.polgomez.movies.list.MoviesListContract
-import com.polgomez.movies.model.MovieModel
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class MoviesState(private var stateMovies: List<MovieModel>? = null, private var statePage: Int = 0) : StoryState,
+class MoviesState(private var stateMovies: List<Movie>? = null, private var statePage: Int = 1) : StoryState,
     MoviesListContract.State {
 
-    override fun getMovies(): List<MovieModel>? = stateMovies
+    override fun getMovies(): List<Movie>? = stateMovies
 
-    override fun setMovies(movies: List<MovieModel>) {
+    override fun setMovies(movies: List<Movie>) {
         stateMovies = movies
     }
 
