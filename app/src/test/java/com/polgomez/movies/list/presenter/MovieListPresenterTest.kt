@@ -58,7 +58,7 @@ class MovieListPresenterTest {
 
     @Test
     fun `should load state movies if has first page`() {
-        val movies = listOf(Movie("FakeMovieTitle", "FakeMovieImageUrl"))
+        val movies = listOf(Movie("FakeMovieTitle", "FakeDescription", "", ""))
         givenStateMovies(movies)
         givenStatePage(1)
 
@@ -72,7 +72,7 @@ class MovieListPresenterTest {
     fun `should update view after obtaining movies page on start`() {
         givenStateMovies()
         givenStatePage(1)
-        val movies = listOf(Movie("FakeMovieTitle", "FakeMovieImageUrl"))
+        val movies = listOf(Movie("FakeMovieTitle", "FakeDescription", "", ""))
         givenMoviesPageResponse(movies)
 
         presenter.start().run {
@@ -86,8 +86,8 @@ class MovieListPresenterTest {
     fun `should update state after obtaining movies page on start`() {
         givenStateMovies()
         givenStatePage(1)
-        val movies = listOf(Movie("FakeMovieTitle", "FakeMovieImageUrl"))
-        givenMoviesPageResponse(movies)
+        val movies = listOf(Movie("FakeMovieTitle", "FakeDescription", "", ""))
+        givenMoviesPageResponse(movies, 400)
 
         presenter.start().run {
             testScheduler.triggerActions()
@@ -95,6 +95,7 @@ class MovieListPresenterTest {
 
         verify(state).setMovies(movies)
         verify(state).setPage(2)
+        verify(state).setTotalPages(400)
     }
 
     @Test
@@ -102,7 +103,7 @@ class MovieListPresenterTest {
         givenStateMovies(emptyList())
         givenStatePage(2)
         givenStateTotalPages(3)
-        val movies = listOf(Movie("FakeMovieTitle", "FakeMovieImageUrl"))
+        val movies = listOf(Movie("FakeMovieTitle", "FakeDescription", "", ""))
         givenMoviesPageResponse(movies)
 
         presenter.onBottomReached()
@@ -112,10 +113,13 @@ class MovieListPresenterTest {
 
     @Test
     fun `should update view after obtaining paginated movies`() {
-        givenStateMovies(listOf(Movie("FakeMovieTitle", "FakeMovieImageUrl")))
+        givenStateMovies(listOf(Movie("FakeMovieTitle", "FakeDescription", "", "")))
         givenStatePage(2)
         givenStateTotalPages(3)
-        val movies = listOf(Movie("FakeMovieTitle", "FakeMovieImageUrl"), Movie("FakeMovieTitle", "FakeMovieImageUrl"))
+        val movies = listOf(
+            Movie("FakeMovieTitle", "FakeDescription", "", ""),
+            Movie("FakeMovieTitle", "FakeDescription", "", "")
+        )
         givenMoviesPageResponse(movies)
 
         presenter.onBottomReached().run { testScheduler.triggerActions() }
@@ -128,10 +132,13 @@ class MovieListPresenterTest {
 
     @Test
     fun `should update state after obtaining paginated movies`() {
-        givenStateMovies(listOf(Movie("FakeMovieTitle", "FakeMovieImageUrl")))
+        givenStateMovies(listOf(Movie("FakeMovieTitle", "FakeDescription", "", "")))
         givenStatePage(2)
         givenStateTotalPages(3)
-        val movies = listOf(Movie("FakeMovieTitle", "FakeMovieImageUrl"), Movie("FakeMovieTitle", "FakeMovieImageUrl"))
+        val movies = listOf(
+            Movie("FakeMovieTitle", "FakeDescription", "", ""),
+            Movie("FakeMovieTitle", "FakeDescription", "", "")
+        )
         givenMoviesPageResponse(movies)
 
         presenter.onBottomReached().run { testScheduler.triggerActions() }
