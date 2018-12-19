@@ -2,6 +2,7 @@ package com.polgomez.movies.detail.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +37,17 @@ class MovieDetailFragment : Fragment(), MovieDetailContract.View {
         super.onViewCreated(view, savedInstanceState)
         initializeInjections()
         initializePresenter()
+        initializeActionBar()
+    }
+
+    private fun initializeActionBar() {
+        (activity as? AppCompatActivity)?.let {
+            it.setSupportActionBar(toolbar)
+            it.supportActionBar?.let { actionBar ->
+                actionBar.setDisplayShowTitleEnabled(false)
+                actionBar.setDisplayHomeAsUpEnabled(true)
+            }
+        }
     }
 
     private fun initializePresenter() = presenter.apply {

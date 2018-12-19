@@ -1,6 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                 android:layout_width="match_parent"
+                                                 android:orientation="vertical"
+                                                 android:fitsSystemWindows="true"
+                                                 android:background="@color/white"
+                                                 android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            android:layout_marginTop="@dimen/status_bar_height"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"/>
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="horizontal">
+
+        <ImageView
+                android:id="@+id/collapsingImageView"
+                android:layout_width="280dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/movie_placeholder"
+                android:contentDescription="@string/content_description"/>
+
+
+        <android.support.v4.widget.NestedScrollView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:padding="@dimen/default_padding"
+                          android:orientation="vertical">
+
+                <TextView
+                        android:id="@+id/titleText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="48dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        tools:text="Movie title"
+                        android:textSize="20sp"/>
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:orientation="horizontal">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/year"
+                            android:textColor="@color/colorPrimaryDark"/>
+                    <TextView
+                            android:id="@+id/yearText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/small_margin"
+                            tools:text="2018-01-16"
+                            android:textColor="@color/colorPrimaryDark"/>
+
+                </LinearLayout>
+
+                <TextView
+                        android:id="@+id/descriptionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/regular_margin"
+                        android:textColor="@color/colorPrimaryDark"
+                        tools:text="Movie description"
+                        android:paddingBottom="@dimen/regular_margin"
+                        android:textSize="16sp"/>
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

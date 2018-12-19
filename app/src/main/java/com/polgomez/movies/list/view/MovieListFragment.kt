@@ -2,6 +2,7 @@ package com.polgomez.movies.list.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +43,17 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
         initializeInjections()
         initializeViews()
         initializePresenter()
+        initializeActionBar()
+    }
+
+    private fun initializeActionBar() {
+        (activity as? AppCompatActivity)?.let {
+            it.setSupportActionBar(toolbar)
+            it.supportActionBar?.let { actionBar ->
+                actionBar.setDisplayShowTitleEnabled(false)
+                actionBar.setDisplayHomeAsUpEnabled(false)
+            }
+        }
     }
 
     private fun initializePresenter() = presenter.apply {

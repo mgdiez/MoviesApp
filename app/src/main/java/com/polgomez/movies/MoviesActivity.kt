@@ -1,6 +1,7 @@
 package com.polgomez.movies
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.WindowManager
 import com.polgomez.core.StoryActivity
 import com.polgomez.movies.app.MoviesApp
@@ -26,5 +27,13 @@ class MoviesActivity : StoryActivity<MoviesStory>() {
                 moviesApp.component.moviesActivityComponentBuilder().moviesActivityModule(MoviesActivityModule(this))
                     .build()
         moviesActivityComponent.inject(this)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        android.R.id.home -> {
+            onBackPressed()
+            true
+        }
+        else -> false
     }
 }
