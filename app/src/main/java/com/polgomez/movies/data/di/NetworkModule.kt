@@ -3,7 +3,7 @@ package com.polgomez.movies.data.di
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.polgomez.movies.data.MoviesApi
 import com.polgomez.movies.data.MoviesMapper
-import com.polgomez.movies.data.MoviesRepositoryImpl
+import com.polgomez.movies.data.NetworkMoviesRepository
 import com.polgomez.movies.domain.MoviesRepository
 import dagger.Module
 import dagger.Provides
@@ -48,5 +48,5 @@ open class NetworkModule {
 
     @Provides
     fun provideMoviesRepository(moviesApi: MoviesApi, moviesMapper: MoviesMapper): MoviesRepository =
-        MoviesRepositoryImpl(moviesApi, moviesMapper)
+        NetworkMoviesRepository(moviesApi, moviesMapper)
 }
