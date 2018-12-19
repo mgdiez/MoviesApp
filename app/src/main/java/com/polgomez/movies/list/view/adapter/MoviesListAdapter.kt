@@ -14,7 +14,7 @@ class MoviesListAdapter(private val imageLoader: ImageLoader) : RecyclerView.Ada
 
     private var movies: MutableList<Movie> = ArrayList()
 
-    private lateinit var movieListener: (Movie) -> Unit
+    private var movieListener: ((Movie) -> Unit)? = null
 
     init {
         setHasStableIds(true)
@@ -32,7 +32,7 @@ class MoviesListAdapter(private val imageLoader: ImageLoader) : RecyclerView.Ada
         imageLoader.loadImage(movieImageView, movieModel.imageUrl)
         titleText.text = movieModel.title
         itemView.setOnClickListener {
-            movieListener.invoke(movieModel)
+            movieListener?.invoke(movieModel)
         }
     }
 
