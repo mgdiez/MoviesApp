@@ -4,7 +4,7 @@ import com.polgomez.movies.data.dto.GetMoviesResponseDto
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.util.*
+import java.util.Locale
 
 interface MoviesApi {
 
