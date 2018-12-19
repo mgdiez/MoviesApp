@@ -54,7 +54,18 @@ class MoviesListModule() {
     fun provideGetMoviesPageUseCase(@Named("subscribeOn") subscribeOn: Scheduler, @Named("observeOn") observeOn: Scheduler): GetMoviesPageUseCase {
         return GetMoviesPageUseCase(object : MoviesRepository {
             override fun getMovies(page: Int): Single<MoviesPageResponse> {
-                return Single.just(MoviesPageResponse(listOf(Movie("Fake Title", "null")), 1))
+                return Single.just(
+                    MoviesPageResponse(
+                        listOf(
+                            Movie(
+                                "Fake Title",
+                                "Fake Description",
+                                "Fake imageUrl",
+                                "Fake bigImageUrl"
+                            )
+                        ), 1
+                    )
+                )
             }
         }, observeOn, subscribeOn)
     }
