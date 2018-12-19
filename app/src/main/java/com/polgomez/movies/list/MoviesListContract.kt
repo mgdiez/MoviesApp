@@ -26,10 +26,12 @@ interface MoviesListContract {
         fun setMovies(movies: List<Movie>)
         fun setPage(page: Int)
         fun getPage(): Int
+        fun setTotalPages(page: Int)
+        fun getTotalPages(): Int
     }
 
     interface Navigation {
-        fun navigateToMovieDetail()
+        fun navigateToMovieDetail(movie: Movie)
         fun navigateToFilters()
     }
 }

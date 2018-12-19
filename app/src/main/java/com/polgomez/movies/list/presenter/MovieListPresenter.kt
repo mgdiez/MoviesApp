@@ -12,8 +12,6 @@ class MovieListPresenter(
     private val getMoviesPageUseCase: GetMoviesPageUseCase
 ) : MoviesListContract.Presenter {
 
-    private var totalPages: Int = 1
-
     lateinit var view: MoviesListContract.View
 
     override fun attachView(view: MoviesListContract.View) {
@@ -22,7 +20,10 @@ class MovieListPresenter(
 
     override fun start() = state.getMovies()?.let {
         loadMovies(it)
-    } ?: obtainMoviesPage()
+    } ?: run {
+        view.showLoading()
+        obtainMoviesPage()
+    }
 
     private fun loadMovies(moviesList: List<Movie>) = when (state.getPage()) {
         1 -> with(view) {
@@ -33,7 +34,6 @@ class MovieListPresenter(
     }
 
     private fun obtainMoviesPage() {
-        view.showLoading()
         getMoviesPageUseCase.execute(state.getPage(), ::handleMoviesPageResponse, ::handleError)
     }
 
@@ -43,12 +43,11 @@ class MovieListPresenter(
     }
 
     private fun handleMoviesPageResponse(moviesPageResponse: MoviesPageResponse) {
-        totalPages = moviesPageResponse.totalPages
         loadMovies(moviesPageResponse.moviesList)
-        updateState(moviesPageResponse.moviesList)
+        updateState(moviesPageResponse.moviesList, moviesPageResponse.totalPages)
     }
 
-    private fun updateState(moviesList: List<Movie>) {
+    private fun updateState(moviesList: List<Movie>, totalPages: Int) {
         val currentPage = state.getPage()
         if (state.getMovies() == null) {
             state.setMovies(moviesList)
@@ -67,10 +66,11 @@ class MovieListPresenter(
     }
 
     override fun onMovieClicked(movie: Movie) {
+        navigation.navigateToMovieDetail(movie)
     }
 
     override fun onBottomReached() {
-        if (state.getPage() <= totalPages) obtainMoviesPage()
+        if (state.getPage() <= state.getTotalPages()) obtainMoviesPage()
     }
 
     override fun onRetryClicked() {

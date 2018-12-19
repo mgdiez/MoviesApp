@@ -6,8 +6,18 @@ import com.polgomez.movies.list.MoviesListContract
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class MoviesState(private var stateMovies: List<Movie>? = null, private var statePage: Int = 1) : StoryState,
+class MoviesState(
+    private var stateMovies: List<Movie>? = null,
+    private var statePage: Int = 1,
+    private var totalPages: Int = 1
+) : StoryState,
     MoviesListContract.State {
+
+    override fun setTotalPages(page: Int) {
+        totalPages = page
+    }
+
+    override fun getTotalPages(): Int = totalPages
 
     override fun getMovies(): List<Movie>? = stateMovies
 
