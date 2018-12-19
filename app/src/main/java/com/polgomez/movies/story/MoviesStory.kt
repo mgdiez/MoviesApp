@@ -8,7 +8,7 @@ import com.polgomez.movies.domain.bo.Movie
 import com.polgomez.movies.list.MoviesListContract
 import com.polgomez.movies.list.view.MovieListFragment
 
-class MoviesStory(storyScreenContainer: StoryScreenContainer, state: MoviesState) :
+class MoviesStory(storyScreenContainer: StoryScreenContainer, state: MoviesState = MoviesState()) :
     UserStory<MoviesState>(storyScreenContainer, state), MoviesListContract.Navigation {
 
     override fun start() {

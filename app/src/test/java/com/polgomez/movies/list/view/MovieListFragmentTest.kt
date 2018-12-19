@@ -9,13 +9,13 @@ import com.nhaarman.mockito_kotlin.spy
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.verifyNoMoreInteractions
 import com.nhaarman.mockito_kotlin.whenever
-import com.polgomez.core.story.UserStory
 import com.polgomez.movies.BuildConfig
 import com.polgomez.movies.MoviesActivity
 import com.polgomez.movies.R
 import com.polgomez.movies.domain.bo.Movie
 import com.polgomez.movies.list.MoviesListContract
 import com.polgomez.movies.list.view.adapter.MoviesListAdapter
+import com.polgomez.movies.story.MoviesState
 import com.polgomez.movies.story.MoviesStory
 import com.polgomez.robolectricDaggerMockRule
 import org.junit.Before
@@ -35,9 +35,7 @@ class MovieListFragmentTest {
 
     val presenter: MoviesListContract.Presenter = mock()
 
-    val movieStory: MoviesStory = mock()
-
-    val userStory: UserStory<*> = movieStory
+    val moviesStory: MoviesStory = spy(MoviesStory(mock(), MoviesState()))
 
     val moviesListAdapter: MoviesListAdapter = spy(MoviesListAdapter(mock()))
 
@@ -46,7 +44,7 @@ class MovieListFragmentTest {
     @Before
     fun setUp() {
         // Disabling user story behaviour to enable fragment isolated test
-        doNothing().whenever(userStory).start()
+        doNothing().whenever(moviesStory).start()
 
         fragment = MovieListFragment()
         SupportFragmentTestUtil.startVisibleFragment(fragment, MoviesActivity::class.java, R.id.container)

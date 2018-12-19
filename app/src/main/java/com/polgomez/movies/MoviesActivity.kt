@@ -6,8 +6,9 @@ import com.polgomez.core.StoryActivity
 import com.polgomez.movies.app.MoviesApp
 import com.polgomez.movies.di.MoviesActivityComponent
 import com.polgomez.movies.di.MoviesActivityModule
+import com.polgomez.movies.story.MoviesStory
 
-class MoviesActivity : StoryActivity() {
+class MoviesActivity : StoryActivity<MoviesStory>() {
 
     lateinit var moviesActivityComponent: MoviesActivityComponent
 

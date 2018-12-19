@@ -6,10 +6,10 @@ import com.polgomez.core.story.UserStory
 import com.polgomez.movies.R
 import javax.inject.Inject
 
-abstract class StoryActivity : AppCompatActivity() {
+abstract class StoryActivity<T : UserStory<*>> : AppCompatActivity() {
 
     @Inject
-    lateinit var userStory: UserStory<*>
+    lateinit var userStory: T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initializeInjections()

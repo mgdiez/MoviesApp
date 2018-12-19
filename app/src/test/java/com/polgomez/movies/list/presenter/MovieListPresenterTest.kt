@@ -36,11 +36,11 @@ class MovieListPresenterTest {
 
     private lateinit var presenter: MovieListPresenter
 
-    private val movieListCaptor: KArgumentCaptor<List<Movie>> = argumentCaptor<List<Movie>>()
+    private val movieListCaptor: KArgumentCaptor<List<Movie>> = argumentCaptor()
 
     @Before
     fun setUp() {
-        presenter = MovieListPresenter(state, navigation, getMoviesPageUseCase).apply { attachView(view) }
+        presenter = MovieListPresenter(state, navigation, getMoviesPageUseCase).also { it.attachView(view) }
     }
 
     @Test
@@ -85,6 +85,7 @@ class MovieListPresenterTest {
     fun `should update state after obtaining movies page on start`() {
         givenStateMovies()
         givenStatePage(1)
+        givenStateTotalPages(200)
         val movies = listOf(createFakeMovie())
         givenMoviesPageResponse(movies, 400)
 

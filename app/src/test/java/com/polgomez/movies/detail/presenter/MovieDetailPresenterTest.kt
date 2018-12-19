@@ -18,7 +18,7 @@ class MovieDetailPresenterTest {
 
     @Before
     fun setUp() {
-        presenter = MovieDetailPresenter(state).apply { attachView(view) }
+        presenter = MovieDetailPresenter(state).also { it.attachView(view) }
     }
 
     @Test
