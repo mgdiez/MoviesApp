@@ -4,4 +4,8 @@
     <string name="error_message">Ouch! Something went wrong</string>
     <string name="retry">Retry</string>
     <string name="year">First air date:</string>
+    <string name="min_year">Min Year:</string>
+    <string name="max_year">Max Year:</string>
+    <string name="confirm">Confirm</string>
+    <string name="clear">Clear</string>
 </resources>

@@ -2,17 +2,35 @@ package com.polgomez.movies.filter.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import com.polgomez.core.extensions.hide
+import com.polgomez.core.extensions.show
 import com.polgomez.movies.MoviesActivity
+import com.polgomez.movies.R
 import com.polgomez.movies.filter.MoviesFilterContract
 import com.polgomez.movies.filter.di.MoviesFilterModule
+import kotlinx.android.synthetic.main.fragment_movies_filter.*
+import javax.inject.Inject
 
 class MoviesFilterFragment : Fragment(), MoviesFilterContract.View {
 
+    @Inject
+    lateinit var presenter: MoviesFilterContract.Presenter
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+        inflater.inflate(R.layout.fragment_movies_filter, container, false)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initializeInjections()
+        initializePresenter()
+    }
+
+    private fun initializePresenter() {
+        presenter.attachView(this)
+        presenter.start()
     }
 
     private fun initializeInjections() {
@@ -21,17 +39,21 @@ class MoviesFilterFragment : Fragment(), MoviesFilterContract.View {
             .inject(this)
     }
 
-    override fun loadMinYear(minYear: String) {
-    }
+    override fun loadMinYear(minYear: String) = minYearTextInput.setText(minYear)
 
-    override fun loadMaxYear(minYear: String) {
-    }
+    override fun loadMaxYear(maxYear: String) = maxYearTextInput.setText(maxYear)
 
-    override fun showClearButton() {
-    }
+    override fun showClearButton() = clearButton.show()
 
-    override fun hideClearButton() {
-    }
+    override fun hideClearButton() = clearButton.hide()
+
+    override fun showConfirmButton() = buttonsLayout.show()
+
+    override fun hideConfirmButton() = buttonsLayout.hide()
+
+    override fun showError() = errorView.show()
+
+    override fun hideError() = errorView.hide()
 
     companion object {
 

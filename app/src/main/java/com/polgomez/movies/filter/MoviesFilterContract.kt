@@ -5,11 +5,19 @@ interface MoviesFilterContract {
     interface View {
         fun loadMinYear(minYear: String)
 
-        fun loadMaxYear(minYear: String)
+        fun loadMaxYear(maxYear: String)
 
         fun showClearButton()
 
         fun hideClearButton()
+
+        fun showConfirmButton()
+
+        fun hideConfirmButton()
+
+        fun showError()
+
+        fun hideError()
     }
 
     interface Presenter {

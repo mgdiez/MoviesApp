@@ -1,8 +1,10 @@
 package com.polgomez.movies.filter.di
 
+import com.polgomez.core.di.scope.PerFragment
 import com.polgomez.movies.filter.view.MoviesFilterFragment
 import dagger.Subcomponent
 
+@PerFragment
 @Subcomponent(modules = [MoviesFilterModule::class])
 interface MoviesFilterComponent {
 
