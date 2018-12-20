@@ -28,7 +28,7 @@ isolated from the Android Framework and improve the sociable unit tests. This de
 #### Third: Movies User Story
 * Implemented all related entities to create the MoviesStory. Created a MoviesActivity that will contain the fragments. The activities will be only as a Fragment containers, created layout for movies activity as a container with a CoordinatorLayout.
 * Added Mockito and Mockito Kotlin dependencies to the project and some unit testing for the movies story.
-### Fourth: Movies List 
+#### Fourth: Movies List 
 * Everything related to the presentation is defined in the MovieListContract, implemented each one and tested. We are using a MVP contract "vitaminated" with State and Navigation.
     * View and Presenter implementations dumb as possible. The presenter updates the state and the view render the model.
     * The ***State*** for the current view that is handled by the presenter and saved/restored by the UserStory, contains all the necessary data as movies, page and total pages.
@@ -41,19 +41,22 @@ isolated from the Android Framework and improve the sociable unit tests. This de
 * Strong and advanced use of Dagger to inject dependencies everywhere.
 * Refactorized first iteration of user story.
 * Added Lottie dependency to show custom animation for the error and the loading views.
-### Fifth: Data layer, Movies Api
+#### Fifth: Data layer, Movies Api
 * Added Retrofit dependency to this project, implemented Retrofit boilerplate.
 * Created a MoviesApi, data transfer objects as data classes for the responses and the mappers to map to business object then implemented a MoviesRepository.
 * Created a NetworkModule to expose all the data dependencies. Updated subcomponents and their modules.
-### Sixth: Movie detail
+#### Sixth: Movie detail
 * Defined movie detail contract and implemented and tested all entities.
 * Handling device rotation to render detail screen in landscape and portrait.
 * Refactorized story injection in activity scope to fix issue found when device rotates.
 * Updated business objects to contain detail data from the request.
 * Added toolbar per Fragment to better UI
-### Seventh: Filtering implementation
+#### Seventh: Filtering implementation
 * Defined and Implemented a screen, with min an max year inputs with error handling. Load previous filter and allows clear.
 * Modified api to allow optional parameters min year and max year to allow filtering, spreading changes in repository and implementation
+
+### TODOs
+* Espresso testing
 
 ### Project dependencies
  * [Dagger 2](https://github.com/google/dagger) 
