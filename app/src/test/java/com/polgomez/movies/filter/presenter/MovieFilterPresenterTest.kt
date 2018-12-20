@@ -71,6 +71,7 @@ class MovieFilterPresenterTest {
 
         verify(state).setMinYear(null)
         verify(state).setMaxYear(null)
+        verify(state).clear()
     }
 
     @Test
@@ -91,6 +92,7 @@ class MovieFilterPresenterTest {
 
         verify(state).setMinYear("1900")
         verify(state).setMaxYear(null)
+        verify(state).clear()
         verify(navigation).onFiltersConfirm()
     }
 
@@ -109,7 +111,7 @@ class MovieFilterPresenterTest {
 
         verify(view).showConfirmButton()
         verify(view).showClearButton()
-        verify(view).hideErrorMaxYear()
+        verify(view).hideErrorMinYear()
     }
 
     @Test

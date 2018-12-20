@@ -46,6 +46,7 @@ class MovieFilterPresenter(
         if (isValidMaxYear && isValidMinYear) {
             state.setMinYear(currentMinYear)
             state.setMaxYear(currentMaxYear)
+            state.clear()
             navigation.onFiltersConfirm()
         } else {
             view.showError()

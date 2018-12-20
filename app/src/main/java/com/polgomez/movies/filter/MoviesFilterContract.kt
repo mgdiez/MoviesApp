@@ -50,6 +50,8 @@ interface MoviesFilterContract {
         fun getMaxYear(): String?
 
         fun setMaxYear(maxYear: String?)
+
+        fun clear()
     }
 
     interface Navigation {

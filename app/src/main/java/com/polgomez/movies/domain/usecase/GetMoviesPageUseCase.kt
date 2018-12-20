@@ -14,7 +14,7 @@ class GetMoviesPageUseCase(
 
     private var subscription: Disposable = Disposables.empty()
 
-    fun execute(page: Int, minYear:String?, maxYear: String?, onComplete: (MoviesPageResponse) -> Unit, onError: (Throwable) -> Unit) {
+    fun execute(page: Int, minYear: String?, maxYear: String?, onComplete: (MoviesPageResponse) -> Unit, onError: (Throwable) -> Unit) {
         subscription = moviesRepository.getMovies(page, minYear, maxYear)
             .subscribeOn(subscribeOn)
             .observeOn(observeOn)
