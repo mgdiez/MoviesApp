@@ -2,10 +2,10 @@ package com.polgomez.movies.data.dto
 
 data class MovieDto(
     val backdrop_path: String,
-    val first_air_date: String,
+    val release_date: String,
     val genre_ids: List<Int>,
     val id: Int,
-    val name: String,
+    val title: String,
     val origin_country: List<String>,
     val original_language: String,
     val original_name: String,

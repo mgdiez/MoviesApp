@@ -33,8 +33,8 @@ class MovieListPresenter(
         else -> view.showMoreMovies(moviesList)
     }
 
-    private fun obtainMoviesPage() {
-        getMoviesPageUseCase.execute(state.getPage(), ::handleMoviesPageResponse, ::handleError)
+    private fun obtainMoviesPage() = with(state) {
+        getMoviesPageUseCase.execute(getPage(), getMinYear(), getMaxYear(), ::handleMoviesPageResponse, ::handleError)
     }
 
     private fun handleError(throwable: Throwable) {
@@ -47,18 +47,15 @@ class MovieListPresenter(
         updateState(moviesPageResponse.moviesList, moviesPageResponse.totalPages)
     }
 
-    private fun updateState(moviesList: List<Movie>, totalPages: Int) {
-        state.setTotalPages(totalPages)
-        if (state.getMovies() == null) state.setMovies(moviesList)
+    private fun updateState(moviesList: List<Movie>, totalPages: Int) = with(state) {
+        setTotalPages(totalPages)
+        if (getMovies() == null) setMovies(moviesList)
         else {
-            val movies = state.getMovies()!!.toMutableList()
+            val movies = getMovies()!!.toMutableList()
             movies.addAll(moviesList)
-            state.setMovies(movies)
+            setMovies(movies)
         }
-        if (hasMorePages()) {
-            val currentPage = state.getPage()
-            state.setPage(currentPage.inc())
-        }
+        if (hasMorePages()) setPage(getPage() + 1)
     }
 
     override fun stop() {
@@ -78,6 +75,10 @@ class MovieListPresenter(
     override fun onRetryClicked() {
         view.hideError()
         obtainMoviesPage()
+    }
+
+    override fun onMenuFiltersClicked() {
+        navigation.navigateToFilters()
     }
 
     companion object {

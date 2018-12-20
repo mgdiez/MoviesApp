@@ -19,6 +19,7 @@ interface MoviesListContract {
         fun onMovieClicked(movie: Movie)
         fun onBottomReached()
         fun onRetryClicked()
+        fun onMenuFiltersClicked()
     }
 
     interface State {
@@ -29,6 +30,8 @@ interface MoviesListContract {
         fun setTotalPages(page: Int)
         fun getTotalPages(): Int
         fun setSelectedMovie(movie: Movie)
+        fun getMaxYear(): String?
+        fun getMinYear(): String?
     }
 
     interface Navigation {

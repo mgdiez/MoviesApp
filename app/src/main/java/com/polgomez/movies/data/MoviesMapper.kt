@@ -15,11 +15,11 @@ class MoviesMapper {
     private fun moviesDtoToBo(moviesDto: List<MovieDto>): List<Movie> =
         moviesDto.map {
             Movie(
-                it.name,
+                it.title,
                 it.overview ?: "",
                 generateImageUrl(it.poster_path),
                 generateBigImageUrl(it.poster_path),
-                it.first_air_date
+                it.release_date
             )
         }
 

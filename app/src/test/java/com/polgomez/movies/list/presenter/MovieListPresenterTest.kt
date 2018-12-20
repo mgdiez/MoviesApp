@@ -2,8 +2,10 @@ package com.polgomez.movies.list.presenter
 
 import com.nhaarman.mockito_kotlin.KArgumentCaptor
 import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.anyOrNull
 import com.nhaarman.mockito_kotlin.argumentCaptor
 import com.nhaarman.mockito_kotlin.eq
+import com.nhaarman.mockito_kotlin.isNull
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.never
 import com.nhaarman.mockito_kotlin.spy
@@ -52,7 +54,7 @@ class MovieListPresenterTest {
         presenter.start()
 
         verify(view).showLoading()
-        verify(getMoviesPageUseCase).execute(eq(1), any(), any())
+        verify(getMoviesPageUseCase).execute(eq(1), isNull(), isNull(), any(), any())
     }
 
     @Test
@@ -108,7 +110,7 @@ class MovieListPresenterTest {
 
         presenter.onBottomReached()
 
-        verify(getMoviesPageUseCase).execute(eq(2), any(), any())
+        verify(getMoviesPageUseCase).execute(eq(2), isNull(), isNull(), any(), any())
     }
 
     @Test
@@ -158,7 +160,7 @@ class MovieListPresenterTest {
 
         presenter.onBottomReached()
 
-        verify(getMoviesPageUseCase, never()).execute(eq(2), any(), any())
+        verify(getMoviesPageUseCase, never()).execute(eq(2), isNull(), isNull(), any(), any())
     }
 
     @Test
@@ -178,7 +180,7 @@ class MovieListPresenterTest {
         givenStateMovies()
         givenStateTotalPages(1)
         givenStatePage(1)
-        whenever(moviesRepository.getMovies(any())).thenReturn(Single.error(Exception()))
+        whenever(moviesRepository.getMovies(any(), anyOrNull(), anyOrNull())).thenReturn(Single.error(Exception()))
 
         presenter.start().run { testScheduler.triggerActions() }
 
@@ -190,7 +192,7 @@ class MovieListPresenterTest {
         givenStateMovies()
         givenStateTotalPages(3)
         givenStatePage(2)
-        whenever(moviesRepository.getMovies(any())).thenReturn(Single.error(Exception()))
+        whenever(moviesRepository.getMovies(any(), anyOrNull(), anyOrNull())).thenReturn(Single.error(Exception()))
 
         presenter.onBottomReached().run { testScheduler.triggerActions() }
 
@@ -205,7 +207,7 @@ class MovieListPresenterTest {
         presenter.onRetryClicked()
 
         verify(view).hideError()
-        verify(getMoviesPageUseCase).execute(eq(1), any(), any())
+        verify(getMoviesPageUseCase).execute(eq(1), isNull(), isNull(), any(), any())
     }
 
     @Test
@@ -227,10 +229,15 @@ class MovieListPresenterTest {
 
     private fun givenStatePage(page: Int = 1) = whenever(state.getPage()).thenReturn(page)
 
+    private fun givenStateFilters(min: String? = null, max:String? = null) {
+         whenever(state.getMinYear()).thenReturn(min)
+         whenever(state.getMaxYear()).thenReturn(max)
+    }
+
     private fun givenStateTotalPages(page: Int = 2) = whenever(state.getTotalPages()).thenReturn(page)
 
     private fun givenStateMovies(movies: List<Movie>? = null) = whenever(state.getMovies()).thenReturn(movies)
 
     private fun givenMoviesPageResponse(movies: List<Movie> = emptyList(), page: Int = 1) =
-        whenever(moviesRepository.getMovies(any())).thenReturn(Single.just(MoviesPageResponse(movies, page)))
+        whenever(moviesRepository.getMovies(any(), anyOrNull(), anyOrNull())).thenReturn(Single.just(MoviesPageResponse(movies, page)))
 }

@@ -23,4 +23,8 @@ class MoviesScreenContainer(private val fragmentManager: FragmentManager) : Stor
             }
         }
     }
+
+    override fun previousScreen() {
+        fragmentManager.popBackStackImmediate()
+    }
 }
