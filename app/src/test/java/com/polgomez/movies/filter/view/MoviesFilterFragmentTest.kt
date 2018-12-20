@@ -1,5 +1,6 @@
 package com.polgomez.movies.filter.view
 
+import android.view.View
 import com.nhaarman.mockito_kotlin.doNothing
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.spy
@@ -27,8 +28,6 @@ class MoviesFilterFragmentTest {
     @get:Rule
     val rule = robolectricDaggerMockRule()
 
-    val state: MoviesFilterContract.State = mock()
-
     val presenter: MoviesFilterContract.Presenter = mock()
 
     val moviesStory: MoviesStory = spy(MoviesStory(mock(), MoviesState()))
@@ -53,5 +52,68 @@ class MoviesFilterFragmentTest {
     fun `should initialize presenter`() {
         verify(presenter).attachView(fragment)
         verify(presenter).start()
+    }
+
+    @Test
+    fun `should hide buttons on invocation`() {
+        fragment.hideConfirmButton()
+
+        val view = fragment.view?.findViewById<View>(R.id.buttonsLayout)
+        assert(view?.visibility == View.GONE)
+    }
+
+    @Test
+    fun `should show buttons on invocation`() {
+        fragment.showConfirmButton()
+
+        val view = fragment.view?.findViewById<View>(R.id.buttonsLayout)
+        assert(view?.visibility == View.VISIBLE)
+    }
+
+    @Test
+    fun `should show clear button on invocation`() {
+        fragment.showClearButton()
+
+        val view = fragment.view?.findViewById<View>(R.id.clearButton)
+        assert(view?.visibility == View.VISIBLE)
+    }
+
+    @Test
+    fun `should hide clear button on invocation`() {
+        fragment.hideClearButton()
+
+        val view = fragment.view?.findViewById<View>(R.id.clearButton)
+        assert(view?.visibility == View.GONE)
+    }
+
+    @Test
+    fun `should show error view on invocation`() {
+        fragment.showError()
+
+        val view = fragment.view?.findViewById<View>(R.id.errorView)
+        assert(view?.visibility == View.VISIBLE)
+    }
+
+    @Test
+    fun `should hide error view on invocation`() {
+        fragment.hideError()
+
+        val view = fragment.view?.findViewById<View>(R.id.errorView)
+        assert(view?.visibility == View.GONE)
+    }
+
+    @Test
+    fun `should delegate confirm click to presenter`() {
+        fragment.view?.findViewById<View>(R.id.confirmButton)?.performClick()
+
+        verify(presenter).onFiltersConfirmed()
+    }
+
+    @Test
+    fun `should delegate clear click to presenter`() {
+        fragment.showClearButton()
+        fragment.view?.findViewById<View>(R.id.clearButton)?.performClick()
+
+        verify(presenter).onFiltersCleared()
     }
 }

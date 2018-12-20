@@ -2,6 +2,7 @@ package com.polgomez.movies.filter.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +26,24 @@ class MoviesFilterFragment : Fragment(), MoviesFilterContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeInjections()
+        initializeViews()
         initializePresenter()
+        initializeActionBar()
+    }
+
+    private fun initializeActionBar() {
+        (activity as? AppCompatActivity)?.let {
+            it.setSupportActionBar(toolbar)
+            it.supportActionBar?.let { actionBar ->
+                actionBar.setDisplayShowTitleEnabled(false)
+                actionBar.setDisplayHomeAsUpEnabled(true)
+            }
+        }
+    }
+
+    private fun initializeViews() {
+        confirmButton.setOnClickListener { presenter.onFiltersConfirmed() }
+        clearButton.setOnClickListener { presenter.onFiltersCleared() }
     }
 
     private fun initializePresenter() {
