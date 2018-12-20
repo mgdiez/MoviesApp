@@ -57,9 +57,9 @@ class MoviesFilterFragment : Fragment(), MoviesFilterContract.View {
             .inject(this)
     }
 
-    override fun loadMinYear(minYear: String) = minYearTextInput.setText(minYear)
+    override fun loadMinYear(minYear: String?) = minYearTextInput.setText(minYear)
 
-    override fun loadMaxYear(maxYear: String) = maxYearTextInput.setText(maxYear)
+    override fun loadMaxYear(maxYear: String?) = maxYearTextInput.setText(maxYear)
 
     override fun showClearButton() = clearButton.show()
 

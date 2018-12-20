@@ -3,9 +3,9 @@ package com.polgomez.movies.filter
 interface MoviesFilterContract {
 
     interface View {
-        fun loadMinYear(minYear: String)
+        fun loadMinYear(minYear: String?)
 
-        fun loadMaxYear(maxYear: String)
+        fun loadMaxYear(maxYear: String?)
 
         fun showClearButton()
 

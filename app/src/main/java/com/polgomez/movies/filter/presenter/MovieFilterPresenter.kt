@@ -13,15 +13,44 @@ class MovieFilterPresenter(
         this.view = view
     }
 
-    override fun start() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    private var currentMinYear: String? = null
+    private var currentMaxYear: String? = null
+
+    override fun start() = with(view) {
+        val hasMinYear = state.getMinYear()?.let {
+            currentMinYear = it
+            loadMinYear(it)
+            true
+        } ?: false
+
+        val hasMaxYear = state.getMaxYear()?.let {
+            loadMaxYear(it)
+            true
+        } ?: false
+
+        when {
+            hasMinYear || hasMaxYear -> {
+                showConfirmButton()
+                showClearButton()
+            }
+            else -> hideConfirmButton()
+        }
     }
 
     override fun onFiltersConfirmed() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+        state.setMinYear(currentMinYear)
+        state.setMaxYear(currentMaxYear)
+
+        navigation.onFiltersConfirm()
     }
 
     override fun onFiltersCleared() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+        currentMinYear = null
+        currentMaxYear = null
+
+        with(view) {
+            loadMinYear(currentMinYear)
+            loadMaxYear(currentMaxYear)
+        }
     }
 }
