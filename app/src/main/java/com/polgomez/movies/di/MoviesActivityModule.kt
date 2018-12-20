@@ -5,7 +5,6 @@ import android.content.res.Configuration
 import android.support.v4.app.FragmentManager
 import com.polgomez.core.di.scope.PerActivity
 import com.polgomez.core.story.StoryScreenContainer
-import com.polgomez.core.story.UserStory
 import com.polgomez.movies.MoviesActivity
 import com.polgomez.movies.story.MoviesScreenContainer
 import com.polgomez.movies.story.MoviesState
@@ -32,12 +31,12 @@ class MoviesActivityModule(private val moviesActivity: MoviesActivity) {
 
     @Provides
     @PerActivity
-    fun provideStoryState(): MoviesState = MoviesState()
+    fun provideStoryState(userStory: MoviesStory): MoviesState = userStory.state
 
     @Provides
     @PerActivity
-    fun provideUserStory(storyScreenContainer: StoryScreenContainer, storyState: MoviesState): UserStory<*> =
-        MoviesStory(storyScreenContainer, storyState)
+    fun provideUserStory(storyScreenContainer: StoryScreenContainer): MoviesStory =
+        MoviesStory(storyScreenContainer)
 
     @Provides
     @PerActivity

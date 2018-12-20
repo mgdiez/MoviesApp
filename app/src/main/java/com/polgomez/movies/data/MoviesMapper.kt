@@ -16,9 +16,10 @@ class MoviesMapper {
         moviesDto.map {
             Movie(
                 it.name,
-                it.overview,
+                it.overview ?: "",
                 generateImageUrl(it.poster_path),
-                generateBigImageUrl(it.poster_path)
+                generateBigImageUrl(it.poster_path),
+                it.first_air_date
             )
         }
 

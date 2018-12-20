@@ -6,7 +6,7 @@ import android.util.Log
 import com.polgomez.movies.R
 
 class StoryScreen(
-    private val fragmentClass: Class<out Fragment>,
+    val fragmentClass: Class<out Fragment>,
     @param:IdRes @get:IdRes val containerId: Int = R.id.container
 ) {
 

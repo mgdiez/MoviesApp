@@ -2,6 +2,7 @@ package com.polgomez.movies.list.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -28,12 +29,6 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
     @Inject
     lateinit var moviesLayoutManager: RecyclerView.LayoutManager
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        initializeInjections()
-    }
-
     private fun initializeInjections() {
         val moviesActivity = activity as MoviesActivity
         moviesActivity.moviesActivityComponent.moviesListComponentBuilder().moviesListModule(MoviesListModule()).build()
@@ -45,14 +40,25 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initializeInjections()
         initializeViews()
         initializePresenter()
+        initializeActionBar()
     }
 
-    private fun initializePresenter() {
-        presenter.attachView(this)
-        presenter.start()
+    private fun initializeActionBar() {
+        (activity as? AppCompatActivity)?.let {
+            it.setSupportActionBar(toolbar)
+            it.supportActionBar?.let { actionBar ->
+                actionBar.setDisplayShowTitleEnabled(false)
+                actionBar.setDisplayHomeAsUpEnabled(false)
+            }
+        }
+    }
+
+    private fun initializePresenter() = presenter.apply {
+        attachView(this@MovieListFragment)
+        start()
     }
 
     private fun initializeViews() {

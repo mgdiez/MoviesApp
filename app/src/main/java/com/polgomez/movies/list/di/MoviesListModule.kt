@@ -3,7 +3,6 @@ package com.polgomez.movies.list.di
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import com.polgomez.core.di.scope.PerFragment
-import com.polgomez.core.story.UserStory
 import com.polgomez.core.view.ImageLoader
 import com.polgomez.core.view.MoviesListLayoutManagerProvider
 import com.polgomez.movies.domain.MoviesRepository
@@ -12,6 +11,7 @@ import com.polgomez.movies.list.MoviesListContract
 import com.polgomez.movies.list.presenter.MovieListPresenter
 import com.polgomez.movies.list.view.adapter.MoviesListAdapter
 import com.polgomez.movies.story.MoviesState
+import com.polgomez.movies.story.MoviesStory
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
@@ -26,8 +26,7 @@ class MoviesListModule() {
 
     @Provides
     @PerFragment
-    fun provideNavigation(userStory: UserStory<*>): MoviesListContract.Navigation =
-        userStory as MoviesListContract.Navigation
+    fun provideNavigation(userStory: MoviesStory): MoviesListContract.Navigation = userStory
 
     @Provides
     @PerFragment

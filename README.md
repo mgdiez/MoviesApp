@@ -45,3 +45,11 @@ isolated from the Android Framework and improve the sociable unit tests. This de
 * Added Retrofit dependency to this project, implemented Retrofit boilerplate.
 * Created a MoviesApi, data transfer objects as data classes for the responses and the mappers to map to business object then implemented a MoviesRepository.
 * Created a NetworkModule to expose all the data dependencies. Updated subcomponents and their modules.
+### Sixth: Movie detail
+* Defined movie detail contract and implemented and tested all entities.
+* Handling device rotation to render detail screen in landscape and portrait.
+* Refactorized story injection in activity scope to fix issue found when device rotates.
+* Updated business objects to contain detail data from the request.
+* Added toolbar per Fragment to better UI
+ 
+ 

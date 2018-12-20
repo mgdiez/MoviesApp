@@ -36,12 +36,11 @@ class MovieListPresenterTest {
 
     private lateinit var presenter: MovieListPresenter
 
-    private val movieListCaptor: KArgumentCaptor<List<Movie>> = argumentCaptor<List<Movie>>()
+    private val movieListCaptor: KArgumentCaptor<List<Movie>> = argumentCaptor()
 
     @Before
     fun setUp() {
-        presenter = MovieListPresenter(state, navigation, getMoviesPageUseCase)
-        presenter.attachView(view)
+        presenter = MovieListPresenter(state, navigation, getMoviesPageUseCase).also { it.attachView(view) }
     }
 
     @Test
@@ -58,7 +57,7 @@ class MovieListPresenterTest {
 
     @Test
     fun `should load state movies if has first page`() {
-        val movies = listOf(Movie("FakeMovieTitle", "FakeDescription", "", ""))
+        val movies = listOf(createFakeMovie())
         givenStateMovies(movies)
         givenStatePage(1)
 
@@ -72,7 +71,7 @@ class MovieListPresenterTest {
     fun `should update view after obtaining movies page on start`() {
         givenStateMovies()
         givenStatePage(1)
-        val movies = listOf(Movie("FakeMovieTitle", "FakeDescription", "", ""))
+        val movies = listOf(createFakeMovie())
         givenMoviesPageResponse(movies)
 
         presenter.start().run {
@@ -86,7 +85,8 @@ class MovieListPresenterTest {
     fun `should update state after obtaining movies page on start`() {
         givenStateMovies()
         givenStatePage(1)
-        val movies = listOf(Movie("FakeMovieTitle", "FakeDescription", "", ""))
+        givenStateTotalPages(200)
+        val movies = listOf(createFakeMovie())
         givenMoviesPageResponse(movies, 400)
 
         presenter.start().run {
@@ -103,7 +103,7 @@ class MovieListPresenterTest {
         givenStateMovies(emptyList())
         givenStatePage(2)
         givenStateTotalPages(3)
-        val movies = listOf(Movie("FakeMovieTitle", "FakeDescription", "", ""))
+        val movies = listOf(createFakeMovie())
         givenMoviesPageResponse(movies)
 
         presenter.onBottomReached()
@@ -113,12 +113,12 @@ class MovieListPresenterTest {
 
     @Test
     fun `should update view after obtaining paginated movies`() {
-        givenStateMovies(listOf(Movie("FakeMovieTitle", "FakeDescription", "", "")))
+        givenStateMovies(listOf(createFakeMovie()))
         givenStatePage(2)
         givenStateTotalPages(3)
         val movies = listOf(
-            Movie("FakeMovieTitle", "FakeDescription", "", ""),
-            Movie("FakeMovieTitle", "FakeDescription", "", "")
+            createFakeMovie(),
+            createFakeMovie()
         )
         givenMoviesPageResponse(movies)
 
@@ -132,12 +132,12 @@ class MovieListPresenterTest {
 
     @Test
     fun `should update state after obtaining paginated movies`() {
-        givenStateMovies(listOf(Movie("FakeMovieTitle", "FakeDescription", "", "")))
+        givenStateMovies(listOf(createFakeMovie()))
         givenStatePage(2)
         givenStateTotalPages(3)
         val movies = listOf(
-            Movie("FakeMovieTitle", "FakeDescription", "", ""),
-            Movie("FakeMovieTitle", "FakeDescription", "", "")
+            createFakeMovie(),
+            createFakeMovie()
         )
         givenMoviesPageResponse(movies)
 
@@ -221,6 +221,9 @@ class MovieListPresenterTest {
 
         verify(navigation).navigateToMovieDetail(any())
     }
+
+    private fun createFakeMovie() =
+        Movie("FakeMovieTitle", "FakeDescription", "fakeImageUrl", "fakeBigImageUrl", "fakeYear")
 
     private fun givenStatePage(page: Int = 1) = whenever(state.getPage()).thenReturn(page)
 

@@ -1,6 +1,7 @@
 package com.polgomez.movies.story
 
 import com.polgomez.core.story.StoryState
+import com.polgomez.movies.detail.MovieDetailContract
 import com.polgomez.movies.domain.bo.Movie
 import com.polgomez.movies.list.MoviesListContract
 import kotlinx.android.parcel.Parcelize
@@ -9,9 +10,9 @@ import kotlinx.android.parcel.Parcelize
 class MoviesState(
     private var stateMovies: List<Movie>? = null,
     private var statePage: Int = 1,
-    private var totalPages: Int = 1
-) : StoryState,
-    MoviesListContract.State {
+    private var totalPages: Int = 1,
+    private var currentMovie: Movie? = null
+) : StoryState, MoviesListContract.State, MovieDetailContract.State {
 
     override fun setTotalPages(page: Int) {
         totalPages = page
@@ -30,4 +31,10 @@ class MoviesState(
     }
 
     override fun getPage(): Int = statePage
+
+    override fun getCurrentMovie(): Movie = currentMovie!!
+
+    override fun setSelectedMovie(movie: Movie) {
+        currentMovie = movie
+    }
 }

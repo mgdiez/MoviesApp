@@ -48,18 +48,17 @@ class MovieListPresenter(
     }
 
     private fun updateState(moviesList: List<Movie>, totalPages: Int) {
-        val currentPage = state.getPage()
-        if (state.getMovies() == null) {
-            state.setMovies(moviesList)
-        } else {
+        state.setTotalPages(totalPages)
+        if (state.getMovies() == null) state.setMovies(moviesList)
+        else {
             val movies = state.getMovies()!!.toMutableList()
             movies.addAll(moviesList)
             state.setMovies(movies)
         }
-        if (currentPage <= totalPages) {
-            state.setPage(currentPage + 1)
+        if (hasMorePages()) {
+            val currentPage = state.getPage()
+            state.setPage(currentPage.inc())
         }
-        state.setTotalPages(totalPages)
     }
 
     override fun stop() {
@@ -71,8 +70,10 @@ class MovieListPresenter(
     }
 
     override fun onBottomReached() {
-        if (state.getPage() <= state.getTotalPages()) obtainMoviesPage()
+        if (hasMorePages()) obtainMoviesPage()
     }
+
+    private fun hasMorePages() = state.getPage() <= state.getTotalPages()
 
     override fun onRetryClicked() {
         view.hideError()
