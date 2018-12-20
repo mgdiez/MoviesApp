@@ -19,10 +19,11 @@ fun View.hide() {
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
     LayoutInflater.from(context).inflate(layoutRes, this, false)
 
-fun EditText.onChange(cb: (String?) -> Unit) {
+fun EditText.onChange(callback: (String?) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
-        override fun afterTextChanged(s: Editable?) {
-            cb(s.toString())
+        override fun afterTextChanged(s: Editable) {
+            val afterTextChanged = s.toString()
+            callback(if (afterTextChanged == "") null else afterTextChanged)
         }
 
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}

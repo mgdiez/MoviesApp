@@ -14,18 +14,29 @@ class MovieListPresenter(
 
     lateinit var view: MoviesListContract.View
 
+    private var isFiltering = false
+
     override fun attachView(view: MoviesListContract.View) {
         this.view = view
     }
 
-    override fun start() = state.getMovies()?.let {
-        loadMovies(it)
-    } ?: run {
-        view.showLoading()
-        obtainMoviesPage()
+    override fun start() {
+        if (state.getMinYear() == null && state.getMaxYear() == null) {
+            isFiltering = false
+            state.getMovies()?.let {
+                loadMovies(it)
+            } ?: run {
+                view.showLoading()
+                obtainMoviesPage()
+            }
+        } else {
+            isFiltering = true
+            view.showLoading()
+            obtainMoviesPage()
+        }
     }
 
-    private fun loadMovies(moviesList: List<Movie>) = when (state.getPage()) {
+    private fun loadMovies(moviesList: List<Movie>) = when (getCurrentPage()) {
         1 -> with(view) {
             hideLoading()
             showMovies(moviesList)
@@ -33,9 +44,10 @@ class MovieListPresenter(
         else -> view.showMoreMovies(moviesList)
     }
 
-    private fun obtainMoviesPage() {
-        getMoviesPageUseCase.execute(state.getPage(), ::handleMoviesPageResponse, ::handleError)
-    }
+    private fun obtainMoviesPage() =
+        getMoviesPageUseCase.execute(getCurrentPage(), state.getMinYear(), state.getMaxYear(), ::handleMoviesPageResponse, ::handleError)
+
+    private fun getCurrentPage(): Int = if (isFiltering) state.getFilterPage() else state.getPage()
 
     private fun handleError(throwable: Throwable) {
         if (state.getPage() == 1) view.showError()
@@ -48,6 +60,7 @@ class MovieListPresenter(
     }
 
     private fun updateState(moviesList: List<Movie>, totalPages: Int) {
+        if (isFiltering) state.setFilterTotalPages(totalPages) else state.setTotalPages(totalPages)
         state.setTotalPages(totalPages)
         if (state.getMovies() == null) state.setMovies(moviesList)
         else {
@@ -56,8 +69,7 @@ class MovieListPresenter(
             state.setMovies(movies)
         }
         if (hasMorePages()) {
-            val currentPage = state.getPage()
-            state.setPage(currentPage.inc())
+            if (isFiltering) state.setFilterPage(state.getFilterPage() + 1) else state.setPage(state.getPage() + 1)
         }
     }
 
@@ -73,7 +85,7 @@ class MovieListPresenter(
         if (hasMorePages()) obtainMoviesPage()
     }
 
-    private fun hasMorePages() = state.getPage() <= state.getTotalPages()
+    private fun hasMorePages() = if(isFiltering) state.getFilterPage() <= state.getFilterTotalPages() else state.getPage() <= state.getTotalPages()
 
     override fun onRetryClicked() {
         view.hideError()

@@ -30,6 +30,12 @@ interface MoviesListContract {
         fun setTotalPages(page: Int)
         fun getTotalPages(): Int
         fun setSelectedMovie(movie: Movie)
+        fun getMaxYear(): String?
+        fun getMinYear(): String?
+        fun getFilterPage(): Int
+        fun setFilterPage(filterPage: Int)
+        fun getFilterTotalPages(): Int
+        fun setFilterTotalPages(filterTotalPages: Int)
     }
 
     interface Navigation {

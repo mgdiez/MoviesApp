@@ -14,8 +14,11 @@ class MoviesState(
     private var totalPages: Int = 1,
     private var currentMovie: Movie? = null,
     private var minYear: String? = null,
-    private var maxYear: String? = null
+    private var maxYear: String? = null,
+    private var filterStatePage: Int = 1,
+    private var filterTotalPages: Int = 1
 ) : StoryState, MoviesListContract.State, MovieDetailContract.State, MoviesFilterContract.State {
+
     override fun getMinYear(): String? = minYear
 
     override fun setMinYear(minYear: String?) {
@@ -50,5 +53,17 @@ class MoviesState(
 
     override fun setSelectedMovie(movie: Movie) {
         currentMovie = movie
+    }
+
+    override fun getFilterPage(): Int = filterStatePage
+
+    override fun setFilterPage(filterPage: Int) {
+        filterStatePage = filterPage
+    }
+
+    override fun getFilterTotalPages() = filterTotalPages
+
+    override fun setFilterTotalPages(filterTotalPages: Int) {
+        this.filterTotalPages = filterTotalPages
     }
 }
