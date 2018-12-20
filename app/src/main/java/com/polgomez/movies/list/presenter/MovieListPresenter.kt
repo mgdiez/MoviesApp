@@ -80,6 +80,10 @@ class MovieListPresenter(
         obtainMoviesPage()
     }
 
+    override fun onMenuFiltersClicked() {
+        navigation.navigateToFilters()
+    }
+
     companion object {
         private val TAG: String = MovieListPresenter::class.java.simpleName
     }

@@ -6,6 +6,7 @@ import com.polgomez.core.story.UserStory
 import com.polgomez.movies.detail.view.MovieDetailFragment
 import com.polgomez.movies.domain.bo.Movie
 import com.polgomez.movies.filter.MoviesFilterContract
+import com.polgomez.movies.filter.view.MoviesFilterFragment
 import com.polgomez.movies.list.MoviesListContract
 import com.polgomez.movies.list.view.MovieListFragment
 
@@ -23,10 +24,10 @@ class MoviesStory(storyScreenContainer: StoryScreenContainer, state: MoviesState
     }
 
     override fun navigateToFilters() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+        storyScreenContainer.replaceStoryScreen(StoryScreen(MoviesFilterFragment::class.java))
     }
 
     override fun onFiltersConfirm() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+        storyScreenContainer.previousScreen()
     }
 }

@@ -8,6 +8,7 @@ import com.nhaarman.mockito_kotlin.verify
 import com.polgomez.core.story.StoryScreen
 import com.polgomez.core.story.StoryScreenContainer
 import com.polgomez.movies.detail.view.MovieDetailFragment
+import com.polgomez.movies.filter.view.MoviesFilterFragment
 import com.polgomez.movies.list.view.MovieListFragment
 import org.junit.Before
 import org.junit.Test
@@ -51,5 +52,22 @@ class MoviesStoryTest {
 
         val screen = screenCaptor.firstValue
         assert(screen.fragmentClass == MovieDetailFragment::class.java)
+    }
+
+    @Test
+    fun `should replace by movies filters on navigate to filters`() {
+        moviesStory.navigateToFilters()
+
+        verify(storyScreenContainer).replaceStoryScreen(screenCaptor.capture())
+
+        val screen = screenCaptor.firstValue
+        assert(screen.fragmentClass == MoviesFilterFragment::class.java)
+    }
+
+    @Test
+    fun `should move to previous screen when filters confirmed`() {
+        moviesStory.onFiltersConfirm()
+
+        verify(storyScreenContainer).previousScreen()
     }
 }

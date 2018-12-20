@@ -19,6 +19,7 @@ interface MoviesListContract {
         fun onMovieClicked(movie: Movie)
         fun onBottomReached()
         fun onRetryClicked()
+        fun onMenuFiltersClicked()
     }
 
     interface State {

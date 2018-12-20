@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.polgomez.core.extensions.hide
@@ -28,6 +30,26 @@ class MovieListFragment : Fragment(), MoviesListContract.View {
 
     @Inject
     lateinit var moviesLayoutManager: RecyclerView.LayoutManager
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setHasOptionsMenu(true)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.clear()
+        activity?.menuInflater?.inflate(R.menu.menu_movies_detail, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.menuItemFilters -> {
+            presenter.onMenuFiltersClicked()
+            true
+        }
+        else -> false
+    }
 
     private fun initializeInjections() {
         val moviesActivity = activity as MoviesActivity

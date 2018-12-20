@@ -5,4 +5,6 @@ interface StoryScreenContainer {
     fun addStoryScreen(storyScreen: StoryScreen)
 
     fun replaceStoryScreen(storyScreen: StoryScreen)
+
+    fun previousScreen()
 }

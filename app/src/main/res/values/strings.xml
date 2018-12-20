@@ -8,4 +8,5 @@
     <string name="max_year">Max Year:</string>
     <string name="confirm">Confirm</string>
     <string name="clear">Clear</string>
+    <string name="filters">Filters</string>
 </resources>
