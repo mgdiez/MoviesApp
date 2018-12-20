@@ -53,4 +53,12 @@ class MovieFilterPresenter(
             loadMaxYear(currentMaxYear)
         }
     }
+
+    override fun onMinYearChanged(minYear: String?) {
+        currentMinYear = minYear
+    }
+
+    override fun onMaxYearChanged(maxYear: String?) {
+       currentMaxYear = maxYear
+    }
 }

@@ -28,6 +28,10 @@ interface MoviesFilterContract {
         fun onFiltersConfirmed()
 
         fun onFiltersCleared()
+
+        fun onMinYearChanged(minYear: String?)
+
+        fun onMaxYearChanged(maxYear: String?)
     }
 
     interface State {

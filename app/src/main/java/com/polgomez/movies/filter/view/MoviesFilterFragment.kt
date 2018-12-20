@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.polgomez.core.extensions.hide
+import com.polgomez.core.extensions.onChange
 import com.polgomez.core.extensions.show
 import com.polgomez.movies.MoviesActivity
 import com.polgomez.movies.R
@@ -44,6 +45,12 @@ class MoviesFilterFragment : Fragment(), MoviesFilterContract.View {
     private fun initializeViews() {
         confirmButton.setOnClickListener { presenter.onFiltersConfirmed() }
         clearButton.setOnClickListener { presenter.onFiltersCleared() }
+        minYearTextInput.onChange {
+            presenter.onMinYearChanged(it)
+        }
+        maxYearTextInput.onChange {
+            presenter.onMaxYearChanged(it)
+        }
     }
 
     private fun initializePresenter() {

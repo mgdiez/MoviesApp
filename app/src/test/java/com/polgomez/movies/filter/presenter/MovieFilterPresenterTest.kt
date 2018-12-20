@@ -76,4 +76,16 @@ class MovieFilterPresenterTest {
         verify(view).loadMinYear(null)
         verify(view).loadMaxYear(null)
     }
+
+    @Test
+    fun `should update state with entered values and navigate when filters are confirmed`() {
+        presenter.onMinYearChanged("1900")
+        presenter.onMaxYearChanged(null)
+
+        presenter.onFiltersConfirmed()
+
+        verify(state).setMinYear("1900")
+        verify(state).setMaxYear(null)
+        verify(navigation).onFiltersConfirm()
+    }
 }
