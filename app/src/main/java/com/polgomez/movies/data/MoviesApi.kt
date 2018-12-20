@@ -4,15 +4,17 @@ import com.polgomez.movies.data.dto.GetMoviesResponseDto
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.util.Locale
+import java.util.*
 
 interface MoviesApi {
 
-    @GET("tv/popular")
+    @GET("discover/movie")
     fun getMoviesList(
         @Query("api_key") api: String = API_KEY,
         @Query("language") language: String = Locale.getDefault().language,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("release_date.gte") minYear: String?,
+        @Query("release_date.lte") maxYear: String?
     ): Single<GetMoviesResponseDto>
 
     companion object {
