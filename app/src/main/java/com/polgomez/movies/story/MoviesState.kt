@@ -24,7 +24,7 @@ class MoviesState(
 
     override fun getMaxYear(): String? = maxYear
 
-    override fun setMaxYear(minYear: String?) {
+    override fun setMaxYear(maxYear: String?) {
         this.maxYear = maxYear
     }
 

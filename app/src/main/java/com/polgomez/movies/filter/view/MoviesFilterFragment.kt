@@ -80,6 +80,22 @@ class MoviesFilterFragment : Fragment(), MoviesFilterContract.View {
 
     override fun hideError() = errorView.hide()
 
+    override fun showErrorMaxYear() {
+        maxYearTextInputLayout.error = getString(R.string.not_valid_year)
+    }
+
+    override fun hideErrorMaxYear() {
+        maxYearTextInputLayout.error = null
+    }
+
+    override fun showErrorMinYear() {
+        minYearTextInputLayout.error = getString(R.string.not_valid_year)
+    }
+
+    override fun hideErrorMinYear() {
+        minYearTextInputLayout.error = null
+    }
+
     companion object {
 
         fun newInstance(): MoviesFilterFragment {

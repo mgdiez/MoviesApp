@@ -1,10 +1,12 @@
 package com.polgomez.movies.filter.presenter
 
+import com.polgomez.movies.domain.validation.YearStringValidation
 import com.polgomez.movies.filter.MoviesFilterContract
 
 class MovieFilterPresenter(
     private var state: MoviesFilterContract.State,
-    private var navigation: MoviesFilterContract.Navigation
+    private var navigation: MoviesFilterContract.Navigation,
+    private var yearValidation: YearStringValidation
 ) : MoviesFilterContract.Presenter {
 
     lateinit var view: MoviesFilterContract.View
@@ -38,10 +40,24 @@ class MovieFilterPresenter(
     }
 
     override fun onFiltersConfirmed() {
-        state.setMinYear(currentMinYear)
-        state.setMaxYear(currentMaxYear)
+        val isValidMinYear = currentMinYear?.let(yearValidation::isValid) ?: true
+        val isValidMaxYear = currentMaxYear?.let(yearValidation::isValid) ?: true
 
-        navigation.onFiltersConfirm()
+        if (isValidMaxYear && isValidMinYear) {
+            state.setMinYear(currentMinYear)
+            state.setMaxYear(currentMaxYear)
+            navigation.onFiltersConfirm()
+        } else {
+            view.showError()
+
+            if (!isValidMaxYear) {
+                view.showErrorMaxYear()
+            }
+
+            if (!isValidMinYear) {
+                view.showErrorMinYear()
+            }
+        }
     }
 
     override fun onFiltersCleared() {
@@ -51,14 +67,26 @@ class MovieFilterPresenter(
         with(view) {
             loadMinYear(currentMinYear)
             loadMaxYear(currentMaxYear)
+            hideClearButton()
         }
     }
 
     override fun onMinYearChanged(minYear: String?) {
         currentMinYear = minYear
+        view.hideErrorMinYear()
+        updateClearButtonVisibility()
     }
 
     override fun onMaxYearChanged(maxYear: String?) {
-       currentMaxYear = maxYear
+        currentMaxYear = maxYear
+        view.hideErrorMaxYear()
+        updateClearButtonVisibility()
     }
+
+    private fun updateClearButtonVisibility() =
+        if (currentMinYear == null && currentMaxYear == null) view.hideClearButton()
+        else with(view) {
+            showClearButton()
+            showConfirmButton()
+        }
 }

@@ -9,4 +9,5 @@
     <string name="confirm">Confirm</string>
     <string name="clear">Clear</string>
     <string name="filters">Filters</string>
+    <string name="not_valid_year">Not valid year</string>
 </resources>

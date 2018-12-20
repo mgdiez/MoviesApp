@@ -1,10 +1,12 @@
 package com.polgomez.movies.filter.presenter
 
 import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.never
 import com.nhaarman.mockito_kotlin.spy
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.verifyNoMoreInteractions
 import com.nhaarman.mockito_kotlin.whenever
+import com.polgomez.movies.domain.validation.YearStringValidation
 import com.polgomez.movies.filter.MoviesFilterContract
 import com.polgomez.movies.story.MoviesState
 import org.junit.Before
@@ -18,7 +20,9 @@ class MovieFilterPresenterTest {
 
     private val view: MoviesFilterContract.View = mock()
 
-    private val presenter: MoviesFilterContract.Presenter = MovieFilterPresenter(state, navigation)
+    private val yearValidation = spy(YearStringValidation())
+
+    private val presenter: MoviesFilterContract.Presenter = MovieFilterPresenter(state, navigation, yearValidation)
 
     @Before
     fun setUp() {
@@ -70,11 +74,12 @@ class MovieFilterPresenterTest {
     }
 
     @Test
-    fun `should clear current filter values when filters are cleared`() {
+    fun `should clear current filter values when filters are cleared and hides button`() {
         presenter.onFiltersCleared()
 
         verify(view).loadMinYear(null)
         verify(view).loadMaxYear(null)
+        verify(view).hideClearButton()
     }
 
     @Test
@@ -87,5 +92,48 @@ class MovieFilterPresenterTest {
         verify(state).setMinYear("1900")
         verify(state).setMaxYear(null)
         verify(navigation).onFiltersConfirm()
+    }
+
+    @Test
+    fun `should show buttons if max year is entered and clear error`() {
+        presenter.onMaxYearChanged("2018")
+
+        verify(view).showConfirmButton()
+        verify(view).showClearButton()
+        verify(view).hideErrorMaxYear()
+    }
+
+    @Test
+    fun `should show buttons if min year is entered and clear error`() {
+        presenter.onMinYearChanged("2010")
+
+        verify(view).showConfirmButton()
+        verify(view).showClearButton()
+        verify(view).hideErrorMaxYear()
+    }
+
+    @Test
+    fun `should validate introduced years if are valid navigates`() {
+        presenter.onMinYearChanged("2009")
+        presenter.onMaxYearChanged("2011")
+
+        presenter.onFiltersConfirmed()
+
+        verify(yearValidation).isValid("2009")
+        verify(yearValidation).isValid("2011")
+        verify(navigation).onFiltersConfirm()
+    }
+
+    @Test
+    fun `should validate introduced years if are any invalid show error`() {
+        presenter.onMinYearChanged("1")
+        presenter.onMaxYearChanged("2022")
+
+        presenter.onFiltersConfirmed()
+
+        verify(yearValidation).isValid("1")
+        verify(yearValidation).isValid("2022")
+        verify(view).showError()
+        verify(navigation, never()).onFiltersConfirm()
     }
 }

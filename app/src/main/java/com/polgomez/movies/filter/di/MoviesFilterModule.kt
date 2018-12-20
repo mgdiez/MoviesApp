@@ -1,6 +1,7 @@
 package com.polgomez.movies.filter.di
 
 import com.polgomez.core.di.scope.PerFragment
+import com.polgomez.movies.domain.validation.YearStringValidation
 import com.polgomez.movies.filter.MoviesFilterContract
 import com.polgomez.movies.filter.presenter.MovieFilterPresenter
 import com.polgomez.movies.story.MoviesState
@@ -21,8 +22,13 @@ class MoviesFilterModule {
 
     @Provides
     @PerFragment
+    fun provideYearValidaton(): YearStringValidation = YearStringValidation()
+
+    @Provides
+    @PerFragment
     fun providePresenter(
         state: MoviesFilterContract.State,
-        navigation: MoviesFilterContract.Navigation
-    ): MoviesFilterContract.Presenter = MovieFilterPresenter(state, navigation)
+        navigation: MoviesFilterContract.Navigation,
+        yearValidation: YearStringValidation
+    ): MoviesFilterContract.Presenter = MovieFilterPresenter(state, navigation, yearValidation)
 }

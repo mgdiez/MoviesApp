@@ -18,6 +18,14 @@ interface MoviesFilterContract {
         fun showError()
 
         fun hideError()
+
+        fun showErrorMaxYear()
+
+        fun hideErrorMaxYear()
+
+        fun showErrorMinYear()
+
+        fun hideErrorMinYear()
     }
 
     interface Presenter {
@@ -41,7 +49,7 @@ interface MoviesFilterContract {
 
         fun getMaxYear(): String?
 
-        fun setMaxYear(minYear: String?)
+        fun setMaxYear(maxYear: String?)
     }
 
     interface Navigation {
