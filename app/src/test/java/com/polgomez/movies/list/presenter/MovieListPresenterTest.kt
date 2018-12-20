@@ -229,9 +229,9 @@ class MovieListPresenterTest {
 
     private fun givenStatePage(page: Int = 1) = whenever(state.getPage()).thenReturn(page)
 
-    private fun givenStateFilters(min: String? = null, max:String? = null) {
-         whenever(state.getMinYear()).thenReturn(min)
-         whenever(state.getMaxYear()).thenReturn(max)
+    private fun givenStateFilters(min: String? = null, max: String? = null) {
+        whenever(state.getMinYear()).thenReturn(min)
+        whenever(state.getMaxYear()).thenReturn(max)
     }
 
     private fun givenStateTotalPages(page: Int = 2) = whenever(state.getTotalPages()).thenReturn(page)
