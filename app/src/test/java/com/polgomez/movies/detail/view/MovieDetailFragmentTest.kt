@@ -36,7 +36,7 @@ class MovieDetailFragmentTest {
 
     val moviesStory: MoviesStory = spy(MoviesStory(mock(), MoviesState()))
 
-    val imageLoader : ImageLoader = mock()
+    val imageLoader: ImageLoader = mock()
 
     private lateinit var fragment: MovieDetailFragment
 
@@ -77,7 +77,7 @@ class MovieDetailFragmentTest {
     }
 
     @Test
-    fun `should use image loader to load movie image url into image view`(){
+    fun `should use image loader to load movie image url into image view`() {
         fragment.showMovieBigImage("Fake url")
 
         verify(imageLoader).loadImage(fragment.view?.findViewById<ImageView>(R.id.collapsingImageView)!!, "Fake url")
