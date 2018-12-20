@@ -51,5 +51,24 @@ isolated from the Android Framework and improve the sociable unit tests. This de
 * Refactorized story injection in activity scope to fix issue found when device rotates.
 * Updated business objects to contain detail data from the request.
 * Added toolbar per Fragment to better UI
- 
- 
+### Seventh: Filtering implementation
+* Defined and Implemented a screen, with min an max year inputs with error handling. Load previous filter and allows clear.
+* Modified api to allow optional parameters min year and max year to allow filtering, spreading changes in repository and implementation
+
+### Project dependencies
+ * [Dagger 2](https://github.com/google/dagger) 
+ * [RxJava 2.X](https://github.com/ReactiveX/RxJava/tree/2.x)
+ * [RxAndroid](https://github.com/ReactiveX/RxAndroid/tree/2.x)
+ * [RxKotlin](https://github.com/ReactiveX/RxKotlin/tree/2.x)
+ * [ButterKnife](https://github.com/JakeWharton/butterknife)
+ * [Retrofit 2](https://github.com/square/retrofit)
+ * [OkHttp 3](https://github.com/square/okhttp)
+ * [Lottie](https://github.com/airbnb/lottie/)
+ * [Picasso](http://square.github.io/picasso/)
+### Testing dependencies
+ * [jUnit4](https://github.com/junit-team/junit4)
+ * [Espresso](https://developer.android.com/training/testing/espresso/)
+ * [Robolectric](https://github.com/robolectric/robolectric)
+ * [Mockito](https://github.com/robolectric/robolectric)
+ * [MockitoKotlin](https://github.com/)
+ * [DaggerMock](https://github.com/fabioCollini/DaggerMock)
